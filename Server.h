@@ -14,7 +14,7 @@ namespace server_side {
     class Server {
 
     public:
-        virtual void open(int, ClientHandler) = 0;
+        virtual int open(int, ClientHandler*) = 0;
 
         virtual void stop() = 0;
 

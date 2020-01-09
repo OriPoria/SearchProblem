@@ -7,14 +7,32 @@
 
 
 #include "Server.h"
+using namespace std;
+#include <map>
+#include <sys/socket.h>
+#include <string.h>
+#include <iostream>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <thread>
+#include <unordered_map>
+#include <vector>
+#include <mutex>
 
 class MySerialServer : public server_side::Server {
-public:
+ private:
+  int socketfd;
+  sockaddr_in address;
+
+ public:
 
 
-    void open(int i, ClientHandler handler) override;
+    int open(int port, ClientHandler* handler) override;
 
     void stop() override;
+
+  void start(int);//gets socketfd
+  void SetAddress(const sockaddr_in &address);
 };
 
 
