@@ -8,8 +8,7 @@
 int main() {
 
     MySerialServer* m = new MySerialServer();
-    //Server* server = new StringReverser();
-    ClientHandler* ha = new MyTestClientHandler(2,new StringReverser());
+    ClientHandler* ha = new MyTestClientHandler();
     m->open(5400, ha);
     std::cout << "Hello, World!" << std::endl;
     return 0;
