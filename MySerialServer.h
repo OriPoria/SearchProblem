@@ -27,11 +27,11 @@ class MySerialServer : public server_side::Server {
  public:
 
 
-    int open(int port, ClientHandler* handler) override;
+    int open(int, ClientHandler*) override;
 
     void stop() override;
 
-  void start(int);//gets socketfd
+  void start(int, ClientHandler* handler);//gets socketfd
   void SetAddress(const sockaddr_in &address);
 };
 

@@ -12,9 +12,9 @@
 using namespace std;
 class ClientHandler {
 
-
- public:
-  virtual void handleClient(istream,ostream);
+public:
+    virtual ~ClientHandler();
+  virtual void handleClient(int);
   virtual  int GetProtocol() const;
 };
 

@@ -32,6 +32,20 @@ int MySerialServer::open(int port, ClientHandler* handler) {
     return -2;
   }
 
+    //making socket listen to the port
+    if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
+        std::cerr << "Error during listening command" << std::endl;
+
+    } else {
+        std::cout << "Server is now listening ...\n" << std::endl;
+    }
+
+    // accepting a client
+    int client_socket = accept(socketfd, (struct sockaddr *) &address,
+                               (socklen_t *) &address);
+
+    start(client_socket, handler);
+
   return socketfd;
 
 }
@@ -40,29 +54,10 @@ void MySerialServer::stop() {
 
 }
 
-void MySerialServer::start(int socketfd){
+void MySerialServer::start(int client_socket, ClientHandler* handler) {
 
 
 
-  //making socket listen to the port
-  if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
-    std::cerr << "Error during listening command" << std::endl;
-
-  } else {
-    std::cout << "Server is now listening ...\n" << std::endl;
-  }
-
-  // accepting a client
-  int client_socket = accept(socketfd, (struct sockaddr *) &address,
-                             (socklen_t *) &address);
-
-  if (client_socket == -1) {
-    std::cerr << "Error accepting client" << std::endl;
-
-  }
-
-  close(socketfd); //closing the listening socket
-  std::cout << "wating for a messegae" << std::endl;
 
 
 

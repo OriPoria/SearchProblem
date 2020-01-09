@@ -14,8 +14,9 @@ class MyTestClientHandler: public ClientHandler {
 
 
  public:
+    ~MyTestClientHandler();
   MyTestClientHandler(int,Solver*);//protocol and solver
-  void handleClient(istream istream1, ostream ostream1) override;
+  void handleClient(int) override;
   int GetProtocol() const override;
 
 };

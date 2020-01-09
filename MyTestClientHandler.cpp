@@ -8,8 +8,11 @@ MyTestClientHandler::MyTestClientHandler(int protocol_,Solver* solver_){
   this->protocol = protocol_;
   this->solver = solver_;
 }
+MyTestClientHandler::~MyTestClientHandler() {
+    
+}
 
-void MyTestClientHandler::handleClient(istream istream1, ostream ostream1) {
+void MyTestClientHandler::handleClient(int client_socket) {
   
 }
 
