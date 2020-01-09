@@ -2,14 +2,15 @@
 // Created by ori on 08/01/2020.
 //
 
-#ifndef UNTITLED6_SOLVER_H
-#define UNTITLED6_SOLVER_H
-
+#ifndef EX4__SOLVER_H
+#define EX4___SOLVER_H
+template <typename T,typename S>
 
 class Solver {
-    virtual void solve() = 0;
+
+  virtual S solve(T,S) = 0;//Problom,Solver
 
 };
 
 
-#endif //UNTITLED6_SOLVER_H
+#endif //EX4___SOLVER_H

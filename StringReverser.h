@@ -6,10 +6,11 @@
 #define EX4__STRINGREVERSER_H_
 
 #include "Solver.h"
-
-
-class StringReverser :public Solver{
-  void solve() override;
+#include <string.h>
+using namespace std;
+//template <typename T,typename S>
+class StringReverser :public Solver<string, string>{
+  string solve(string,string) override;
 };
 
 #endif //EX4__STRINGREVERSER_H_

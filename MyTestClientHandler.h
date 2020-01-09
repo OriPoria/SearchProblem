@@ -8,18 +8,18 @@
 #include "ClientHandler.h"
 #include <unistd.h>
 #include <string.h>
-
+template <typename T,typename S>
 class MyTestClientHandler: public ClientHandler {
  private:
-  Solver* solver;
+  Solver<T,S>* solver;
   int protocol;
 
 
  public:
     ~MyTestClientHandler();
-  MyTestClientHandler(int,Solver*);//protocol and solver
+  MyTestClientHandler(int,Solver<T,S>*);//protocol and solver
   void handleClient(int) override;
-  int GetProtocol() const override;
+
 
 };
 
