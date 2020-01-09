@@ -6,7 +6,7 @@
 
 int MySerialServer::open(int port, ClientHandler* handler) {
 //create socket
-  int socketfd = socket(AF_INET, handler->GetProtocol(), 0);
+  int socketfd = socket(AF_INET, SOCK_STREAM, 0);
   if (socketfd == -1) {
     //error
     std::cerr << "Could not create a socket" << std::endl;
@@ -21,30 +21,19 @@ int MySerialServer::open(int port, ClientHandler* handler) {
   address_.sin_addr.s_addr = INADDR_ANY; //give me any IP allocated for my machine
   address_.sin_port = htons(port);
 
-  this->SetAddress(address_);
 
   //we need to convert our number
   // to a number that the network understands.
 
   //the actual bind command
-  if (bind(socketfd, (struct sockaddr *) &address_, sizeof(address_)) == -1) {
+  if (bind(socketfd, (struct sockaddr *)&address_, sizeof(address_)) == -1) {
     std::cerr << "Could not bind the socket to an IP" << std::endl;
     return -2;
   }
 
-    //making socket listen to the port
-    if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
-        std::cerr << "Error during listening command" << std::endl;
 
-    } else {
-        std::cout << "Server is now listening ...\n" << std::endl;
-    }
 
-    // accepting a client
-    int client_socket = accept(socketfd, (struct sockaddr *) &address,
-                               (socklen_t *) &address);
-
-    start(client_socket, handler);
+    start(socketfd, handler, address_);
 
   return socketfd;
 
@@ -54,15 +43,22 @@ void MySerialServer::stop() {
 
 }
 
-void MySerialServer::start(int client_socket, ClientHandler* handler) {
+void MySerialServer::start(int socketfd, ClientHandler* handler, sockaddr_in address_) {
+    //making socket listen to the port
+    if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
+        std::cerr << "Error during listening command" << std::endl;
+
+    } else {
+        std::cout << "Server is now listening ...\n" << std::endl;
+    }
+
+    // accepting a client
+    int client_socket = accept(socketfd, (struct sockaddr *) &address_,(socklen_t *) &address_);
+    cout<<"waiting for message"<<endl;
+
+    handler->handleClient(client_socket);
 
 
 
 
-
-
-
-}
-void MySerialServer::SetAddress(const sockaddr_in &address_) {
-  this->address = address_;
 }

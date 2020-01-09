@@ -18,12 +18,21 @@ using namespace std;
 #include <unordered_map>
 #include <vector>
 #include <mutex>
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <string.h>
+#include <iostream>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <sstream>
 
 #include <map>
 #include <sys/socket.h>
 #include <string.h>
 #include <iostream>
-#include <unistd.h>
+
 #include <netinet/in.h>
 #include <thread>
 #include <unordered_map>
@@ -46,8 +55,7 @@ class MySerialServer : public server_side::Server {
 
     void stop() override;
 
-  void start(int, ClientHandler* handler,sockaddr_in);//gets socketfd
-  void SetAddress(const sockaddr_in &address);
+  void start(int, ClientHandler* handler, sockaddr_in);//gets socketfd
 };
 
 

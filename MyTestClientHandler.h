@@ -6,6 +6,8 @@
 #define EX4__MYTESTCLIENTHANDLER_H_
 
 #include "ClientHandler.h"
+#include <unistd.h>
+#include <string.h>
 
 class MyTestClientHandler: public ClientHandler {
  private:
@@ -20,5 +22,7 @@ class MyTestClientHandler: public ClientHandler {
   int GetProtocol() const override;
 
 };
+
+string fromBufferToString(char[]);
 
 #endif //EX4__MYTESTCLIENTHANDLER_H_
