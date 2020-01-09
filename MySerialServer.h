@@ -19,10 +19,25 @@ using namespace std;
 #include <vector>
 #include <mutex>
 
+#include <map>
+#include <sys/socket.h>
+#include <string.h>
+#include <iostream>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <thread>
+#include <unordered_map>
+
+#include <vector>
+
+#include <mutex>
+
+using namespace std;
+
 class MySerialServer : public server_side::Server {
  private:
   int socketfd;
-  sockaddr_in address;
+ // sockaddr_in address;
 
  public:
 
@@ -31,7 +46,7 @@ class MySerialServer : public server_side::Server {
 
     void stop() override;
 
-  void start(int, ClientHandler* handler);//gets socketfd
+  void start(int, ClientHandler* handler,sockaddr_in);//gets socketfd
   void SetAddress(const sockaddr_in &address);
 };
 

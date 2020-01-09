@@ -6,6 +6,7 @@
 #define EX4__MYTESTCLIENTHANDLER_H_
 
 #include "ClientHandler.h"
+#include <unistd.h>
 
 class MyTestClientHandler: public ClientHandler {
  private:
@@ -14,11 +15,12 @@ class MyTestClientHandler: public ClientHandler {
 
 
  public:
-    ~MyTestClientHandler();
+    //~MyTestClientHandler();
   MyTestClientHandler(int,Solver*);//protocol and solver
   void handleClient(int) override;
   int GetProtocol() const override;
 
+  MyTestClientHandler();
 };
 
 #endif //EX4__MYTESTCLIENTHANDLER_H_

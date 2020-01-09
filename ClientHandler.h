@@ -13,9 +13,9 @@ using namespace std;
 class ClientHandler {
 
 public:
-    virtual ~ClientHandler();
-  virtual void handleClient(int);
-  virtual  int GetProtocol() const;
+   // virtual ~ClientHandler() = 0;
+  virtual void handleClient(int)=0;
+  virtual  int GetProtocol() const=0;
 };
 
 
