@@ -1,14 +1,14 @@
-#include "Server.h"
 #include "MySerialServer.h"
-#include "ClientHandler.h"
 #include "MyTestClientHandler.h"
 #include "StringReverser.h"
 #include <iostream>
 
 int main() {
 
-    MySerialServer* m = new MySerialServer();
-    ClientHandler* ha = new MyTestClientHandler(2, new StringReverser());
-    m->open(5400, ha);
+    server_side::Server* s = new MySerialServer();
+    Solver<string, string>* solver = new StringReverser();
+    ClientHandler* ch = new MyTestClientHandler<string ,string>(2, solver);
+    s->open(5400, ch);
+
     return 0;
 }

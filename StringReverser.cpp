@@ -2,13 +2,13 @@
 // Created by shmuelsuna on 08/01/2020.
 //
 
-#include <string>
 #include "StringReverser.h"
 
-
 using namespace std;
-string StringReverser::solve(string problom,string soulution) {
+/*
+string StringReverser::solve(string problom) {
 // Function to reverse a string
+    string solution;
 
     int n = problom.length();
 
@@ -17,6 +17,7 @@ string StringReverser::solve(string problom,string soulution) {
     for (int i = 0; i < n / 2; i++) {
       swap(problom[i], problom[n - i - 1]);
     }
-  soulution= problom;
-  return soulution;
+  solution = problom;
+  return solution;
 }
+*/

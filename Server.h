@@ -2,11 +2,10 @@
 // Created by ori on 08/01/2020.
 //
 
-#ifndef UNTITLED6_SERVER_H
-#define UNTITLED6_SERVER_H
+#ifndef EX4_SERVER_H
+#define EX4_SERVER_H
 
 #include "ClientHandler.h"
-
 
 
 namespace server_side {
@@ -22,4 +21,4 @@ namespace server_side {
 }
 
 
-#endif //UNTITLED6_SERVER_H
+#endif //EX4_SERVER_H
