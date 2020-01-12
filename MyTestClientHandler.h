@@ -44,6 +44,10 @@ class MyTestClientHandler: public ClientHandler {
                   cout<<"End the communication with the client"<<endl;
                   break;
               }
+
+
+
+
               string solution = solver->solve(s);
               cout<<solution<<endl;
               const char* csolution = solution.c_str();

@@ -60,8 +60,6 @@
                 //time-out for listening
                 struct timeval tv;
                 tv.tv_sec = 20;
-                int i = setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
-
 
 
                 // accepting a client
