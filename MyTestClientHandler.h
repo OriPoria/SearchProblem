@@ -17,7 +17,6 @@ template <typename P, typename S>
 class MyTestClientHandler: public ClientHandler {
  private:
   Solver<P,S>* solver;
-  int protocol;
 
 
  public:
@@ -26,7 +25,6 @@ class MyTestClientHandler: public ClientHandler {
     }
   MyTestClientHandler(int protocol_ ,Solver<P,S>* solver_) {
           this->protocol = protocol_;
-          this->solver = solver_;
 
   }
   void handleClient(int client_socket) override {

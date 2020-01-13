@@ -24,10 +24,8 @@ using namespace std;
 
 class MySerialServer : public server_side::Server {
  private:
-  int socketfd;
- // sockaddr_in address;
-
- volatile bool stop_server = false;
+    int socketfd;
+    volatile bool stop_server = false;
 
  public:
 

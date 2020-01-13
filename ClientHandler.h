@@ -14,7 +14,6 @@ using namespace std;
 class ClientHandler {
 
 public:
-   // virtual ~ClientHandler() = 0;
   virtual void handleClient(int) = 0;
 
 };

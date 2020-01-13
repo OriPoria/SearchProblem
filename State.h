@@ -18,9 +18,11 @@ class State {
 private:
     T state;
     double cost;
+    State<T>* camefrom;
 public:
-    State(T state) {
-        this->state = state;
+    State(T state1, double cost1) {
+        this->state = state1;
+        this->cost = cost1;
     }
 
 

@@ -34,8 +34,41 @@ public:
         return s;
 
     }
+    Searchable<T>* createSearchable(vector<vector<string>> input) {
+        vector<vector<State<T>*>> output;
 
-    Searchable<T>* searchableCreator(string);
+        string::size_type sz;
+
+        int i = 0;
+        int j = 0;
+        int rowNum = input.size() - 2;
+        vector<vector<string>>::iterator itRow = input.begin();
+        for (i = 0 ; i < rowNum; i++ ) {
+            vector<State<T>*> outputLine;
+            vector<string> col = *itRow;
+            vector<string>::iterator itCol = col.begin();
+            int numCol = col.size();
+            for (j = 0; j < numCol; j++) {
+                double cost;
+                square s;
+                s.row = i;
+                s.column = j;
+                string str = *itCol;
+                cost = stod(str, &sz);
+                State<T>* state = new State<T>(s, cost);
+                cout<<state<<endl;
+
+
+
+            }
+            //output.insert(outputLine);
+
+
+
+        }
+
+    }
+
 
 
 

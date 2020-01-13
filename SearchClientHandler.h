@@ -13,11 +13,10 @@
 #include <vector>
 
 
-template <typename P, typename S>
+template <typename T,typename P, typename S>
 class SearchClientHandler : public ClientHandler {
 private:
-    Solver<P, S> *solver;
-    int protocol;
+    Solver<P,S> *solver;
 
 
 public:
@@ -25,8 +24,7 @@ public:
 
     }
 
-    SearchClientHandler(int protocol_, Solver<P, S> *solver_) {
-        this->protocol = protocol_;
+    SearchClientHandler(Solver<P,S> *solver_) {
         this->solver = solver_;
 
     }
@@ -34,7 +32,7 @@ public:
     void handleClient(int client_socket) override {
         char buffer[1024] = {0};
 
-        vector<vector<string>> matrix;
+        vector<vector<string>> clientData;
         while (true) {
             bzero(buffer, 1024);
             vector<string> line;
@@ -51,7 +49,7 @@ public:
                 cout << "End the communication with the client" << endl;
                 break;
             } else {
-                matrix.push_back(line);
+                clientData.push_back(line);
                 const char* readConfirm = "line has beed read successfully";
                 int is_send = send(client_socket, readConfirm, strlen(readConfirm), 0);
 
@@ -59,19 +57,18 @@ public:
             }
 
 
-
-
         }
 
 
 
-        Searchable<square>* s = new Matrix<square>();
+
+
+        //create searchable: Searchable<T>* mySearchable = solver_.createSearchable
         //look for a solution in the cache
         //if not found:
         //look for a solution in files
         //if not found:
 
-        S solution = solver->solve(s);
 
         //solution to string
 
@@ -104,6 +101,10 @@ public:
 
     return line;
     }
+
+
+
+
 
 };
 
