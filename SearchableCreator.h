@@ -70,7 +70,6 @@ public:
         line = *itRow;
         itCol = line.begin();
 
-        int i;
         square1.row = stod(*itCol, &sz);
         itCol++;
         square1.column = stod(*itCol, &sz);
