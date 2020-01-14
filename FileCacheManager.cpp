@@ -13,8 +13,8 @@ FileCacheManager::FileCacheManager(){
 
 string FileCacheManager::getSolution(string problem) {
 
-  string p =  this->problem_solution_map[problem];
-  return p;
+  string solution =  this->problem_solution_map[problem];
+  return solution;
 }
 
 
