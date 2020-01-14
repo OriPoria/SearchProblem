@@ -13,17 +13,18 @@
 
 
 
-template <typename P, typename S>
+//template <typename P, typename S>
 class MyTestClientHandler: public ClientHandler {
  private:
-  Solver<P,S>* solver;
-
+ // Solver<P,S>* solver;
+ Solver<string,string>* solver;
+  int protocol;
 
  public:
     ~MyTestClientHandler() {
 
     }
-  MyTestClientHandler(int protocol_ ,Solver<P,S>* solver_) {
+  MyTestClientHandler(int protocol_ ,Solver<string,string>* solver_) {
           this->protocol = protocol_;
 
   }
