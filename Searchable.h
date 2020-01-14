@@ -22,25 +22,29 @@ class Searchable {
 
 
 template <typename T>
-class Matrix : public Searchable<square> {
+class Matrix : public Searchable<T> {
 private:
-    vector<vector<State<square>>> matrix;
-    State<square>* initialState;
-    State<square>* goalState;
+    vector<vector<State<T>*>> matrix;
+    State<T>* initialState;
+    State<T>* goalState;
 
 public:
-    Matrix(vector<vector<State<square>>> m, State<square> ini, State<square> goal) {
 
+    Matrix(vector<vector<State<T>*>> m, State<T>* ini, State<T>* goal) {
+        this->matrix = m;
+        this->initialState = ini;
+        this->goalState = goal;
     }
 
-    State<square> getInitialState() {
+
+    State<T> getInitialState() {
 
     }
-    bool isGoalState(State<square> state) {
+    bool isGoalState(State<T> state) {
 
 
     }
-    vector<State<square>> getAllPossibleStates(State<square>) {
+    vector<State<T>> getAllPossibleStates(State<T>) {
 
     }
 };

@@ -10,73 +10,50 @@
 #include "Searchable.h"
 #include <string>
 #include "Searcher.h"
+#include "SearchableCreator.h"
 
 using namespace std;
 
-template <typename T,typename P,typename S>
-class ObjectAdapter : public Solver<Searchable<T>*, S> {
+
+template<typename T, typename S>
+class ObjectAdapter : public Solver<Searchable<T> *, S> {
 private:
-    Searcher<T,S>* searcher;
-    Searchable<T>* searchable;
+    Searcher<T, S> *searcher;
 
 public:
-    ObjectAdapter(Searcher<T,S>* s) {
+    ObjectAdapter(Searcher<T, S> *s) {
         this->searcher = s;
     }
 
 
-    virtual S solve(P p) override {
-       //z) setSearchable(p);
+    virtual S solve(Searchable<T> *p) override {
+        //z) setSearchable(p);
 
-      S s = searcher->search(p);
-              //  string result_string = fromProblomToString(s)
+        S s = searcher->search(p);
+        //  string result_string = fromProblomToString(s)
 
         return s;
 
     }
-    Searchable<T>* createSearchable(vector<vector<string>> input) {
-        vector<vector<State<T>*>> output;
 
-        string::size_type sz;
+    Searchable<T> *createProblem(vector<vector<string>> input) override {
 
-        int i = 0;
-        int j = 0;
-        int rowNum = input.size() - 2;
-        vector<vector<string>>::iterator itRow = input.begin();
-        for (i = 0 ; i < rowNum; i++ ) {
-            vector<State<T>*> outputLine;
-            vector<string> col = *itRow;
-            vector<string>::iterator itCol = col.begin();
-            int numCol = col.size();
-            for (j = 0; j < numCol; j++) {
-                double cost;
-                square s;
-                s.row = i;
-                s.column = j;
-                string str = *itCol;
-                cost = stod(str, &sz);
-                State<T>* state = new State<T>(s, cost);
-                cout<<state<<endl;
+        //going forward we can make a creator according to the input
+        SearchableCreator<square> *sc = new MatrixCreator();
+
+        Searchable<T> *mySearchable = sc->create(input);
 
 
+        return mySearchable;
 
-            }
-            //output.insert(outputLine);
-
-
-
-        }
 
     }
 
 
-
-
-    void setSearchable(Searchable<T>* searchable1) {
+    void setSearchable(Searchable<T> *searchable1) {
         this->searchable = searchable1;
     }
 
-    string fromProblomToString(P p);
 };
 
 

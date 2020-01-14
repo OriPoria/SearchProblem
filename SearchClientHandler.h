@@ -13,7 +13,7 @@
 #include <vector>
 
 
-template <typename T,typename P, typename S>
+template <typename P, typename S>
 class SearchClientHandler : public ClientHandler {
 private:
     Solver<P,S> *solver;
@@ -60,7 +60,7 @@ public:
         }
 
 
-
+        P myProblem = solver->createProblem(clientData);
 
 
         //create searchable: Searchable<T>* mySearchable = solver_.createSearchable

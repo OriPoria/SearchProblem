@@ -6,12 +6,16 @@
 #define EX4_SOLVER_H
 
 #include <string.h>
+#include <vector>
 
 using namespace std;
 template <typename P, typename S>
 class Solver {
 public:
     virtual S solve(P) = 0;//Problom,Solver
+
+    //
+    virtual P createProblem(vector<vector<string>>) = 0;
 
 
 };
