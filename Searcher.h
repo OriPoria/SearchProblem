@@ -15,15 +15,7 @@ public:
 };
 
 
-template <typename T,typename S>
-class BFS : public Searcher<T,S> {
-public:
-    virtual S search(Searchable<T>*) {
 
-        string s = "in searcher solution";
-        return s;
-    }
-};
 
 
 #endif //EX4_SEARCHER_H

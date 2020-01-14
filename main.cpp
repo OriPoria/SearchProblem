@@ -3,6 +3,7 @@
 #include "Searchable.h"
 #include "ObjectAdapter.h"
 #include "SearchClientHandler.h"
+#include "BFS.h"
 #include <iostream>
 
 int main() {

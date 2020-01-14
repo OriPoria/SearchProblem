@@ -11,6 +11,7 @@
 #include <string>
 #include "Searcher.h"
 #include "SearchableCreator.h"
+#include "MatrixProblemCreator.h"
 
 using namespace std;
 
@@ -39,7 +40,7 @@ public:
     Searchable<T> *createProblem(vector<vector<string>> input) override {
 
         //going forward we can make a creator according to the input
-        SearchableCreator<square> *sc = new MatrixCreator();
+        SearchableCreator<square> *sc = new MatrixProblemCreator();
 
         Searchable<T> *mySearchable = sc->create(input);
 
