@@ -8,22 +8,12 @@
 #include "Searchable.h"
 #include <string>
 
-template <typename T>
+template <typename T,typename S>
 class Searcher {
 public:
-    virtual string search(Searchable<T>*) = 0;
+    virtual S search(Searchable<T>*) = 0;
 };
 
-
-template <typename T>
-class BFS : public Searcher<T> {
-public:
-    virtual string search(Searchable<T>*) {
-
-        string s = "in searcher solution";
-        return s;
-    }
-};
 
 
 #endif //EX4_SEARCHER_H

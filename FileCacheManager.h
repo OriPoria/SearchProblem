@@ -14,7 +14,13 @@ class FileCacheManager : public CacheManager<string, string> {
  public:
   FileCacheManager();//CTOR
 
+  //void loadFromFile();
 
+  //void saveToFile();
+
+  unsigned int fnv_hash (string key, int len);
+
+  string getFileNameFromHash(string problom);
 
   void save(string problem, string solution);
 
@@ -22,5 +28,9 @@ class FileCacheManager : public CacheManager<string, string> {
   string getSolution(string problem);
 
   bool isThereASolution(string problem);
+
+
+
+
 };
 #endif //EX4__FILECACHEMANAGER_H_
