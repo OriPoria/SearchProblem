@@ -12,6 +12,7 @@ template <typename T,typename S>
 class Searcher {
 public:
     virtual S search(Searchable<T>*) = 0;
+    virtual int getNumOfNodesEvaluated() = 0;
 };
 
 

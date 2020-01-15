@@ -17,10 +17,7 @@ class MatrixProblemCreator : public SearchableCreator<square> {
 public:
 
 
-    virtual Matrix<square> *create(vector<vector<string>> input) {
-
-
-        vector<vector<State<struct square> *>> finalOutput;
+    virtual Searchable<square>* create(vector<vector<string>> input) override {
 
         string::size_type sz;
 
@@ -28,25 +25,37 @@ public:
 
         vector<string> line;
 
+        State<square>*** finalOutput;
+
 
         int i = 0;
         int j = 0;
 
         int rowNum = input.size() - 2;
+
+        int colNum;
+
+
         vector<vector<string>>::iterator itRow = input.begin();
-        vector<string>::iterator itCol;
+
 
         for (i = 0; i < rowNum; i++) {
-            vector<State<square> *> outputLine;
             line = *itRow;
 
-            itCol = line.begin();
+            vector<string>::iterator itCol = line.begin();
+
+            State<square>** outLine = new State<square>*;
 
 
-            int numCol = line.size();
-            for (j = 0; j < numCol; j++) {
+            finalOutput[i] = outLine;
+
+            colNum = line.size();
+
+            for (j = 0; j < colNum; j++) {
                 square1.row = i;
                 square1.column = j;
+
+
 
                 double cost;
                 string str = *itCol;
@@ -54,16 +63,16 @@ public:
 
                 State<square> *state1 = new State<square>(square1, cost);
 
-                outputLine.push_back(state1);
+                outLine[j] = state1;
+
+
                 itCol++;
             }
-            finalOutput.push_back(outputLine);
             itRow++;
-
 
         }
         line = *itRow;
-        itCol = line.begin();
+        vector<string>::iterator itCol = line.begin();
 
         square1.row = stod(*itCol, &sz);
         itCol++;
@@ -78,7 +87,7 @@ public:
         State<square> *goal = new State<square>(square1, 0);
 
 
-        Matrix<square> *matrix = new Matrix<square>(finalOutput, init, goal);
+        MatrixProblem *matrix = new MatrixProblem(finalOutput, init, goal, rowNum, colNum);
         return matrix;
     }
 };

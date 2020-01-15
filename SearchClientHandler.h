@@ -12,11 +12,10 @@
 #include <sys/socket.h>
 #include <vector>
 
-
-template <typename P, typename S>
+template <typename T>
 class SearchClientHandler : public ClientHandler {
 private:
-    Solver<P,S> *solver;
+    Solver<Searchable<T>*,string> *solver;
 
 
 public:
@@ -24,7 +23,7 @@ public:
 
     }
 
-    SearchClientHandler(Solver<P,S> *solver_) {
+    SearchClientHandler(Solver<Searchable<T>*,string> *solver_) {
         this->solver = solver_;
 
     }
@@ -60,7 +59,8 @@ public:
         }
 
 
-        P myProblem = solver->createProblem(clientData);
+        Searchable<square>* myProblem = solver->createProblem(clientData);
+
 
 
         //create searchable: Searchable<T>* mySearchable = solver_.createSearchable
