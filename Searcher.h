@@ -17,6 +17,4 @@ public:
 
 
 
-
-
 #endif //EX4_SEARCHER_H
