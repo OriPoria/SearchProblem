@@ -9,8 +9,8 @@
 #include "CacheManager.h"
 
 class FileCacheManager : public CacheManager<string, string> {
-  map<string, string> problem_solution_map;//this map  is in ram, helps us fetch less times from files
-
+  map<string, string> problem_fileName_map;//this map  is in ram, helps us fetch less times from files
+  map<string, string> fileName_problom_map;
  public:
   FileCacheManager();//CTOR
 
@@ -29,7 +29,7 @@ class FileCacheManager : public CacheManager<string, string> {
 
   bool isThereASolution(string problem);
 
-
+void initializeMaps();
 
 
 };
