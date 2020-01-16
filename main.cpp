@@ -5,6 +5,7 @@
 #include "SearchClientHandler.h"
 #include "BFS.h"
 #include <iostream>
+#include "FileCacheManager.h"
 
 int main() {
 
@@ -14,7 +15,9 @@ int main() {
 
     Solver<Searchable<square*> *, string> *solver = new ObjectAdapter<square*, string>(searcher);
 
-    ClientHandler *ch = new SearchClientHandler<Searchable<square*> *, string>(solver);
+    CacheManager<string,string>*cache_manager = new FileCacheManager();
+
+    ClientHandler *ch = new SearchClientHandler<Searchable<square*> *, string>(solver,cache_manager);
 
     s->open(5400, ch);
 

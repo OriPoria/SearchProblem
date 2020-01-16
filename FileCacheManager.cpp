@@ -41,20 +41,6 @@ string FileCacheManager::getSolution(string problem) {
 
 
 void FileCacheManager::initializeMaps() {
-/*
-  //open the file
-  fstream probSolMap;
-  probSolMap.open(FILE_NAME, ios::in | ios::app);
-  if (!probSolMap.is_open()) { throw "file not found"; }
-  //load to map
-  string key;
-  string value;
-  while (!probSolMap.eof()) {
-    probSolMap >> key >> value;
-    this->problemSolutionMap.insert(pair<string, string>(key, value));
-  }
-}
-  */
 
   string problom;
   string name_of_file;
