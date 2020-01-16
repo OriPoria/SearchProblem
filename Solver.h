@@ -15,7 +15,7 @@ public:
     virtual S solve(P) = 0;//Problom,Solver
 
     //
-    virtual P createProblem(vector<vector<string>>) = 0;
+    virtual P createProblem(vector<string>) = 0;
 
 
 };

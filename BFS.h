@@ -21,7 +21,7 @@ private:
     int nodesEvaluated;
 public:
 
-    virtual string search(Searchable<T>* mySearchable) {
+    virtual string search(Searchable<T>* mySearchable) override {
         State<T>* node = mySearchable->getInitialState();
         node->setColor('g');
         myQueue.push(node);

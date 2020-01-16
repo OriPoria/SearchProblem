@@ -37,23 +37,19 @@ public:
 
     }
 
-    Searchable<T> *createProblem(vector<vector<string>> input) override {
+    Searchable<T> *createProblem(vector<string> input) override {
+
 
         //going forward we can make a creator according to the input
-        SearchableCreator<square> *sc = new MatrixProblemCreator();
+        SearchableCreator<square *> *sc = new MatrixProblemCreator();
 
         Searchable<T> *mySearchable = sc->create(input);
-
 
         return mySearchable;
 
 
     }
 
-
-    void setSearchable(Searchable<T> *searchable1) {
-        this->searchable = searchable1;
-    }
 
 };
 

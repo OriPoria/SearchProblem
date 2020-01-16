@@ -6,7 +6,8 @@
 #define EX4_STATE_H
 
 
-struct square {
+class square {
+public:
     int row;
     int column;
 };
@@ -27,8 +28,6 @@ public:
     void setCost(double cost) {
         State::cost = cost;
     }
-
-public:
 
 
     State(T state1, double cost1) {

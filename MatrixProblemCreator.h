@@ -12,20 +12,24 @@
 #include <vector>
 
 
-class MatrixProblemCreator : public SearchableCreator<square> {
+class MatrixProblemCreator : public SearchableCreator<square*> {
 
 public:
 
 
-    virtual Searchable<square>* create(vector<vector<string>> input) override {
+    virtual Searchable<square*>* create(vector<string> input1) override {
 
         string::size_type sz;
 
-        square square1;
+        vector<vector<string>> input;
+        vector<string>::iterator it = input1.begin();
+        for (; it < input1.end(); it++) {
+            input.push_back(fromBufferToString(*it));
+        }
 
         vector<string> line;
 
-        State<square>*** finalOutput;
+        State<square*>*** finalOutput;
 
 
         int i = 0;
@@ -34,7 +38,7 @@ public:
         int rowNum = input.size() - 2;
 
         int colNum;
-
+        finalOutput = new State<square*>**[rowNum];
 
         vector<vector<string>>::iterator itRow = input.begin();
 
@@ -44,7 +48,7 @@ public:
 
             vector<string>::iterator itCol = line.begin();
 
-            State<square>** outLine = new State<square>*;
+            State<square*>** outLine = new State<square*>*;
 
 
             finalOutput[i] = outLine;
@@ -52,8 +56,9 @@ public:
             colNum = line.size();
 
             for (j = 0; j < colNum; j++) {
-                square1.row = i;
-                square1.column = j;
+                square* square1 = new square();
+                square1->row = i;
+                square1->column = j;
 
 
 
@@ -61,7 +66,7 @@ public:
                 string str = *itCol;
                 cost = stod(str, &sz);
 
-                State<square> *state1 = new State<square>(square1, cost);
+                State<square*> *state1 = new State<square*>(square1, cost);
 
                 outLine[j] = state1;
 
@@ -73,22 +78,41 @@ public:
         }
         line = *itRow;
         vector<string>::iterator itCol = line.begin();
-
-        square1.row = stod(*itCol, &sz);
+        square* square2 = new square();
+        square2->row = stod(*itCol, &sz);
         itCol++;
-        square1.column = stod(*itCol, &sz);
-        State<square> *init = new State<square>(square1, 0);
+        square2->column = stod(*itCol, &sz);
         itRow++;
         line = *itRow;
         itCol = line.begin();
-        square1.row = stod(*itCol, &sz);
+        square* square3 = new square();
+        square3->row = stod(*itCol, &sz);
         itCol++;
-        square1.column = stod(*itCol, &sz);
-        State<square> *goal = new State<square>(square1, 0);
+        square3->column = stod(*itCol, &sz);
 
 
-        MatrixProblem *matrix = new MatrixProblem(finalOutput, init, goal, rowNum, colNum);
+        MatrixProblem *matrix = new MatrixProblem(finalOutput, square2, square3, rowNum, colNum);
         return matrix;
+    }
+    vector<string> fromBufferToString(string string1) {
+        string s;
+        vector<string> line;
+        int i = 0;
+        while (string1[i] != '\0') {
+            while (string1[i] != ',') {
+                if (string1[i] == '\0') {
+                    line.push_back(s);
+                    return line;
+                }
+                s.push_back(string1[i]);
+                i++;
+            }
+            line.push_back(s);
+            s = "";
+            i++;
+        }
+
+        return line;
     }
 };
 

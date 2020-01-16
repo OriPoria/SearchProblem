@@ -12,7 +12,7 @@
 template<typename T>
 class SearchableCreator {
 public:
-    virtual Searchable<T> *create(vector<vector<string>>) = 0;
+    virtual Searchable<T> *create(vector<string>) = 0;
 
 };
 

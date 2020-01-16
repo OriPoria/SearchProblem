@@ -73,10 +73,11 @@
                     cout << "waiting for message" << endl;
 
                     handler->handleClient(client_socket);
-                    stop_server = false;
+                    stop_server = true;
             }
 
 
         }
+        return;
     }
 
