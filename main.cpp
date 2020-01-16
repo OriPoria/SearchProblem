@@ -6,12 +6,16 @@
 #include "BFS.h"
 #include <iostream>
 #include "FileCacheManager.h"
+#include "BestFirstSearch.h"
+
 
 int main() {
 
     server_side::Server *s = new MySerialServer();
 
-    Searcher<square*, string> *searcher = new BFS<square*>();
+   //Searcher<square*, string> *searcher = new BFS<square*>();
+
+  Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
 
     Solver<Searchable<square*> *, string> *solver = new ObjectAdapter<square*, string>(searcher);
 

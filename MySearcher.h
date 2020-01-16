@@ -19,6 +19,10 @@ public:
         return totalCost;
     }
 
+  int setTotalCost(int total_cost) {
+     totalCost = total_cost;
+  }
+
     int getNumOfNodesEvaluated() {
         return this->nodesEvaluated;
     }
