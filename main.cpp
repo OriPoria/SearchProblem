@@ -4,15 +4,18 @@
 #include "ObjectAdapter.h"
 #include "SearchClientHandler.h"
 #include "BFS.h"
+#include <iostream>
 #include "FileCacheManager.h"
-#include "DFS.h"
-#include "MyParallelServer.h"
+#include "BestFirstSearch.h"
+
 
 int main() {
 
     server_side::Server *s = new MySerialServer();
 
-    Searcher<square*, string> *searcher = new BFS<square*>();
+   //Searcher<square*, string> *searcher = new BFS<square*>();
+
+  Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
 
     Solver<Searchable<square*> *, string> *solver = new ObjectAdapter<square*, string>(searcher);
 
@@ -20,8 +23,8 @@ int main() {
 
     ClientHandler *ch = new SearchClientHandler<Searchable<square*> *, string>(solver,cache_manager);
 
-    s->open(5600, ch);
+    s->open(5400, ch);
 
 
     return 0;
-    }
+}
