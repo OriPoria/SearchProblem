@@ -61,28 +61,16 @@ class SearchClientHandler : public ClientHandler {
     P t = solver->createProblem(clientData);
 
     //function that deals with all things with cache(checks if solution is in cache/if not solves and saves
-    activatingCache(string_of_problom, t);
-    // string s = solver->solve(t);
-    // cout<<"in SearchClientHandler: solution: "<<s<<endl;
+    string solution = activatingCache(string_of_problom, t);
 
 
 
 
 
 
+    const char *csolution = solution.c_str();
 
-    //create searchable: Searchable<T>* mySearchable = solver_.createSearchable
-    //look for a solution in the cache
-    //if not found:
-    //look for a solution in files
-    //if not found:
-
-
-    //solution to string
-
-    //const char *csolution = solution to string.c_str();
-
-    //)int is_send = send(client_socket, csolution, strlen(csolution), 0);
+    int is_send = send(client_socket, csolution, strlen(csolution), 0);
     close(client_socket);
 
     return;

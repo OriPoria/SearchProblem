@@ -50,6 +50,7 @@
     void MySerialServer::start(int socketfd, ClientHandler *handler, sockaddr_in address_) {
         //making socket listen to the port
 
+
         while (!stop_server) {
             if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
                 std::cerr << "Error during listening command" << std::endl;
