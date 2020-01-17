@@ -7,7 +7,7 @@
 #include <iostream>
 #include "FileCacheManager.h"
 #include "BestFirstSearch.h"
-
+#include "AStarsearch.h"
 
 int main() {
 
@@ -15,7 +15,9 @@ int main() {
 
    //Searcher<square*, string> *searcher = new BFS<square*>();
 
-  Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
+ // Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
+
+  Searcher<square*, string> *searcher = new AStarsearch<square*>();
 
     Solver<Searchable<square*> *, string> *solver = new ObjectAdapter<square*, string>(searcher);
 
