@@ -7,9 +7,23 @@
 
 
 class square {
-public:
+private:
     int row;
     int column;
+public:
+    square(int i,int j) {
+        this->row = i;
+        this->column = j;
+    }
+
+    int getRow() const {
+        return row;
+    }
+
+    int getColumn() const {
+        return column;
+    }
+
 };
 
 

@@ -25,10 +25,10 @@ private:
 
 public:
 
-    MatrixProblem(State<square*>*** m, square* ini, square* goal, int h, int w) {
+    MatrixProblem(State<square*>*** m,int i,int j,int k,int l, int h, int w) {
         this->matrix = m;
-        this->initialState = this->matrix[ini->row][ini->column];
-        this->goalState = this->matrix[goal->row][goal->column];
+        this->initialState = this->matrix[i][j];
+        this->goalState = this->matrix[k][l];
         this->height = h;
         this->width = w;
 
@@ -40,7 +40,8 @@ public:
         return initialState;
     }
     bool isGoalState(State<square*>* state) {
-        if (state->getState()->row == goalState->getState()->row && state->getState()->column == goalState->getState()->column) {
+        if (state->getState()->getRow() == goalState->getState()->getRow() &&
+        state->getState()->getColumn() == goalState->getState()->getColumn()) {
             return true;
         }
         return false;
@@ -50,8 +51,9 @@ public:
     vector<State<square*>*> getAllPossibleStates(State<square*>* currentState) {
         vector<State<square*> *> neighbors;
 
-        int i = currentState->getState()->row;
-        int j = currentState->getState()->column;
+
+        int i = currentState->getState()->getRow();
+        int j = currentState->getState()->getColumn();
         if (i + 1 < height) { neighbors.push_back(matrix[i + 1][j]);}
         if (j + 1 < width) { neighbors.push_back(matrix[i][j + 1]);}
         if (i > 0) { neighbors.push_back(matrix[i - 1][j]);}

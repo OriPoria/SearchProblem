@@ -34,8 +34,9 @@
 
 
 
-        thread handle([this, socketfd, handler, address_] {start(socketfd, handler, address_);});
-        handle.join();
+//        thread handle([this, socketfd, handler, address_] {start(socketfd, handler, address_);});
+//        handle.join();
+        start(socketfd, handler, address_);
         return socketfd;
 
     }
@@ -56,7 +57,7 @@
                 std::cerr << "Error during listening command" << std::endl;
 
             } else {
-                std::cout << "Server is now listening ...\n" << std::endl;
+                cout << "Server is now listening ...\n" << endl;
 
                 //time-out for listening
                 struct timeval tv;

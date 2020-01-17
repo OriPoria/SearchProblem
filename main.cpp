@@ -4,8 +4,9 @@
 #include "ObjectAdapter.h"
 #include "SearchClientHandler.h"
 #include "BFS.h"
-#include <iostream>
 #include "FileCacheManager.h"
+#include "DFS.h"
+#include "MyParallelServer.h"
 
 int main() {
 
@@ -23,4 +24,4 @@ int main() {
 
 
     return 0;
-}
+    }

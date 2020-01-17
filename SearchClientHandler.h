@@ -55,18 +55,17 @@ class SearchClientHandler : public ClientHandler {
       }
 
     }
+    if (clientData.size() == 0) {
+        close(client_socket);
+        return;
+    }
 
     string string_of_problom = clientsDataToStringOfProblom(clientData);
 
     P t = solver->createProblem(clientData);
 
     //function that deals with all things with cache(checks if solution is in cache/if not solves and saves
-    string solution = activatingCache(string_of_problom, t);
-
-
-
-
-
+    string solution = solver->solve(t);
 
     const char *csolution = solution.c_str();
 
@@ -76,6 +75,9 @@ class SearchClientHandler : public ClientHandler {
     return;
 
   }
+
+
+
   string fromBufferToString(char buffer[]) {
     int i = 0;
     string s = "";

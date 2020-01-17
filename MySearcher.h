@@ -11,17 +11,15 @@
 using namespace std;
 template <typename T>
 class MySearcher : public Searcher<square*,string> {
-private:
+protected:
     int nodesEvaluated;
     double totalCost;
 public:
-    int getTotalCost() const {
-        return totalCost;
-    }
 
     int getNumOfNodesEvaluated() {
         return this->nodesEvaluated;
     }
+
     string backTrace(State<square*>* node, Searchable<square*>* mySearchable) {
         string solution;
         stack<State<square*>*> path;
@@ -33,19 +31,19 @@ public:
             totalCost+=temp1->getCost();
 
         }
-        cout<<"in MySearcher: total cost of the path: "<<totalCost<<endl;
+        cout<<"in MySearcher: total cost of the path: "<<totalCost<<" number of nodes evaluated: "<<this->getNumOfNodesEvaluated()<<endl;
 
         while (!path.empty()) {
             State<square*>* temp2;
             temp2 = path.top();
             path.pop();
-            if (temp1->getState()->row > temp2->getState()->row) {
+            if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
                 solution.append("Up, ");
-            } else if (temp1->getState()->row < temp2->getState()->row) {
+            } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
                 solution.append("Down, ");
-            } else if (temp1->getState()->column > temp2->getState()->column) {
+            } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
                 solution.append("Left, ");
-            } else if (temp1->getState()->column < temp2->getState()->column) {
+            } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
                 solution.append("Right, ");
             }
             temp1 = temp2;

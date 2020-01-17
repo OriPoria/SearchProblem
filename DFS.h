@@ -1,60 +1,57 @@
 //
-// Created by ori on 14/01/2020.
+// Created by ori on 16/01/2020.
 //
 
-#ifndef EX4_BFS_H
-#define EX4_BFS_H
-
+#ifndef EX4_DFS_H
+#define EX4_DFS_H
 
 #include <string>
 #include "Searchable.h"
 #include "Searcher.h"
 #include "MySearcher.h"
-#include <queue>
+#include <stack>
 #include <iterator>
 
 template <typename T>
-class BFS : public MySearcher<T> {
+class DFS : public MySearcher<T> {
 private:
-    queue<State<T>*> myQueue;
+    stack<State<T>*> myStack;
     vector<State<T>*> myVec;
 public:
-
     virtual string search(Searchable<T>* mySearchable) override {
         State<T>* node = mySearchable->getInitialState();
         node->setColor('g');
-        myQueue.push(node);
-        while (!myQueue.empty()) {
-            node = myQueue.front();
-            if (mySearchable->isGoalState(node)) {
-                return this->backTrace(node, mySearchable);
-            }
-            myQueue.pop();
+        myStack.push(node);
+        while (!myStack.empty()) {
+            myStack.pop();
             if (node->getCost() == -1) {
                 node->setColor('b');
+                node = myStack.top();
                 continue;
             }
             myVec = mySearchable->getAllPossibleStates(node);
             typename vector<State<T>*>::iterator it = myVec.begin();
-            for (it ; it < myVec.end(); it++) {
-                State<T>* adj = *it;
-                if (adj->getColor() == 'w') {
+            for (it; it < myVec.end(); it++) {
+                State<T> *adj = *it;
+                if (adj->getColor() == 'w' && adj->getCost() != -1) {
                     adj->setColor('g');
                     adj->setCamefrom(node);
-                    myQueue.push(adj);
+                    myStack.push(adj);
                 }
             }
             this->nodesEvaluated++;
             node->setColor('b');
+            node = myStack.top();
+            if (mySearchable->isGoalState(node)) {
+                return this->backTrace(node, mySearchable);
+            }
+
+
         }
-
-
-
-
     }
-    //not here!
+
 
 };
 
 
-#endif //EX4_BFS_H
+#endif //EX4_DFS_H

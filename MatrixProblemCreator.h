@@ -29,7 +29,7 @@ public:
 
         vector<string> line;
 
-        State<square*>*** finalOutput;
+        State<square*>*** finalOutput = new State<square*>**;
 
 
         int i = 0;
@@ -38,7 +38,9 @@ public:
         int rowNum = input.size() - 2;
 
         int colNum;
-        finalOutput = new State<square*>**[rowNum];
+
+        finalOutput = new State<square *> **[rowNum];
+
 
         vector<vector<string>>::iterator itRow = input.begin();
 
@@ -47,20 +49,17 @@ public:
             line = *itRow;
 
             vector<string>::iterator itCol = line.begin();
+            colNum = line.size();
 
-            State<square*>** outLine = new State<square*>*;
+
+            State<square*>** outLine = new State<square*>*[colNum];
 
 
             finalOutput[i] = outLine;
 
-            colNum = line.size();
 
             for (j = 0; j < colNum; j++) {
-                square* square1 = new square();
-                square1->row = i;
-                square1->column = j;
-
-
+                square* square1 = new square(i, j);
 
                 double cost;
                 string str = *itCol;
@@ -75,23 +74,22 @@ public:
             }
             itRow++;
 
+
         }
+
         line = *itRow;
         vector<string>::iterator itCol = line.begin();
-        square* square2 = new square();
-        square2->row = stod(*itCol, &sz);
+        i = stod(*itCol, &sz);
         itCol++;
-        square2->column = stod(*itCol, &sz);
+        j = stod(*itCol, &sz);
         itRow++;
         line = *itRow;
         itCol = line.begin();
-        square* square3 = new square();
-        square3->row = stod(*itCol, &sz);
+        int k, l;
+        k = stod(*itCol, &sz);
         itCol++;
-        square3->column = stod(*itCol, &sz);
-
-
-        MatrixProblem *matrix = new MatrixProblem(finalOutput, square2, square3, rowNum, colNum);
+        l = stod(*itCol, &sz);
+        MatrixProblem *matrix = new MatrixProblem(finalOutput, i, j,k,l, rowNum, colNum);
         return matrix;
     }
     vector<string> fromBufferToString(string string1) {
