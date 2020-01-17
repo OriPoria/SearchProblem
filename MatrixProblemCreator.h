@@ -66,7 +66,13 @@ public:
                 string str = *itCol;
                 cost = stod(str, &sz);
 
-                State<square*> *state1 = new State<square*>(square1, cost);
+
+                //set up for h cost
+                int rows1 = getNumOfRows(input1);
+              int cols1 = getNumOfCols(input1);
+                double h_cost = calculateHCostOfNode(square1->row,square1->column,rows1,cols1);
+                State<square*> *state1 = new State<square*>(square1, cost,h_cost);
+                //TODO put h cost
 
                 outLine[j] = state1;
 
@@ -114,6 +120,34 @@ public:
 
         return line;
     }
+
+    double calculateHCostOfNode(double row,double col, double rows, double cols){
+      double x = rows- row +1;
+      double y = cols- col+1;
+
+      if (x<0) {
+        x*=-1;
+      }
+      if (y<0) {
+        y*=-1;
+      }
+
+      return x+y;
+    }
+
+    double getNumOfRows(vector<string> input1){
+      vector<string>::iterator it = input1.begin();
+      string first_row = *it;
+      double length =  (first_row.length() /2) +1;
+      return length;
+    }
+
+  double getNumOfCols(vector<string> input1){
+    return input1.size() - 2;
+  }
+
+
+
 };
 
 

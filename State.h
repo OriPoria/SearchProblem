@@ -18,22 +18,26 @@ class State {
 private:
     T state;
     double cost;
+    double h_cost;
     State<T> *camefrom;
     char color;
 public:
     double getCost() const {
         return cost;
     }
-
-    void setCost(double cost) {
+  double GetHCost() const {
+    return h_cost;
+  }
+  void setCost(double cost) {
         State::cost = cost;
     }
 
 
-    State(T state1, double cost1) {
+    State(T state1, double cost1, double h_cost_) {
         this->state = state1;
         this->cost = cost1;
         this->color = 'w';
+        this->h_cost = h_cost_;
     }
 
 
