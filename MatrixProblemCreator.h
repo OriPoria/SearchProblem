@@ -120,8 +120,8 @@ public:
     }
 
     double calculateHCostOfNode(double row,double col, double rows, double cols){
-      double x = rows- row +1;
-      double y = cols- col+1;
+      double x = rows- row -1;
+      double y = cols- col-1;
 
       if (x<0) {
         x*=-1;

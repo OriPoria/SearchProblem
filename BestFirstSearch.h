@@ -61,8 +61,12 @@ class BestFirstSearch : public MySearcher<T> {
         for (it_over_neighborsVector; it_over_neighborsVector < neighborsVector.end(); it_over_neighborsVector++) {
           State<T> *neighbor = *it_over_neighborsVector;
 
-          //if neighbor node is not in open/closed list
-          auto it2 = multiset_openList.find(neighbor);
+          //if neighbor node's cost is -1:
+          if (neighbor->getCost() == -1) {
+            neighborsVector.erase(it_over_neighborsVector);
+            it_over_neighborsVector--;
+            continue;
+          }
 
           if (!hasNodeInClosedList(neighbor) && !hasNodeInOpenList(neighbor)){
 
