@@ -48,12 +48,14 @@ public:
 
             vector<string>::iterator itCol = line.begin();
 
-            State<square*>** outLine = new State<square*>*;
+          colNum = line.size();
+
+            State<square*>** outLine = new State<square*>*[colNum];
 
 
             finalOutput[i] = outLine;
 
-            colNum = line.size();
+
 
             for (j = 0; j < colNum; j++) {
                 square* square1 = new square();
