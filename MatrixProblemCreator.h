@@ -29,7 +29,7 @@ public:
 
         vector<string> line;
 
-        State<square*>*** finalOutput = new State<square*>**;
+        State<square*>*** finalOutput;
 
 
         int i = 0;
@@ -38,9 +38,7 @@ public:
         int rowNum = input.size() - 2;
 
         int colNum;
-
-        finalOutput = new State<square *> **[rowNum];
-
+        finalOutput = new State<square*>**[rowNum];
 
         vector<vector<string>>::iterator itRow = input.begin();
 
@@ -49,8 +47,8 @@ public:
             line = *itRow;
 
             vector<string>::iterator itCol = line.begin();
-            colNum = line.size();
 
+          colNum = line.size();
 
             State<square*>** outLine = new State<square*>*[colNum];
 
@@ -58,8 +56,13 @@ public:
             finalOutput[i] = outLine;
 
 
+
             for (j = 0; j < colNum; j++) {
-                square* square1 = new square(i, j);
+                square* square1 = new square();
+                square1->row = i;
+                square1->column = j;
+
+
 
                 double cost;
                 string str = *itCol;
@@ -80,22 +83,23 @@ public:
             }
             itRow++;
 
-
         }
-
         line = *itRow;
         vector<string>::iterator itCol = line.begin();
-        i = stod(*itCol, &sz);
+        square* square2 = new square();
+        square2->row = stod(*itCol, &sz);
         itCol++;
-        j = stod(*itCol, &sz);
+        square2->column = stod(*itCol, &sz);
         itRow++;
         line = *itRow;
         itCol = line.begin();
-        int k, l;
-        k = stod(*itCol, &sz);
+        square* square3 = new square();
+        square3->row = stod(*itCol, &sz);
         itCol++;
-        l = stod(*itCol, &sz);
-        MatrixProblem *matrix = new MatrixProblem(finalOutput, i, j,k,l, rowNum, colNum);
+        square3->column = stod(*itCol, &sz);
+
+
+        MatrixProblem *matrix = new MatrixProblem(finalOutput, square2, square3, rowNum, colNum);
         return matrix;
     }
     vector<string> fromBufferToString(string string1) {
