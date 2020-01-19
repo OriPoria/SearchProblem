@@ -65,9 +65,10 @@ class SearchClientHandler : public ClientHandler {
     P t = solver->createProblem(clientData);
 
     //function that deals with all things with cache(checks if solution is in cache/if not solves and saves
-    S solution = activatingCache(string_of_problom,t);
+      S solution = activatingCache(string_of_problom,t);
 
     const char *csolution = solution.c_str();
+
     int is_send = send(client_socket, csolution, strlen(csolution), 0);
     close(client_socket);
 
@@ -137,10 +138,10 @@ class SearchClientHandler : public ClientHandler {
     return string_of_problom;
   }
 
-ClientHandler* clone() override {
-    ClientHandler* newObj = new SearchClientHandler(this->solver, this->cache_manager);
-    return newObj;
-}
+    ClientHandler* clone() override {
+        ClientHandler* newObj = new SearchClientHandler(this->solver, this->cache_manager);
+        return newObj;
+    }
 
 };
 

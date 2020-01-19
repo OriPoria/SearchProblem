@@ -48,7 +48,7 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
     //making socket listen to the port
 
 
-    while (!stop_server || i < 10) {
+    while (!stop_server || i < 5) {
 
         if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
             std::cerr << "Error during listening command" << std::endl;
@@ -73,7 +73,7 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
             cout<<"in main: client socket: "<< client_socket<<endl;
                 cout << "waiting for message from client number " << i << "\n\n"<< endl;
 
-            client[i] = thread(&ClientHandler::handleClient,handler, client_socket);
+            client[i] = thread(&ClientHandler::handleClient,handler->clone(), client_socket);
             i++;
 
         }

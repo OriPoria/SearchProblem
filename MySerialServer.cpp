@@ -34,9 +34,8 @@
 
 
 
-//        thread handle([this, socketfd, handler, address_] {start(socketfd, handler, address_);});
-//        handle.join();
-        start(socketfd, handler, address_);
+        thread handle([this, socketfd, handler, address_] {start(socketfd, handler, address_);});
+        handle.join();
         return socketfd;
 
     }
@@ -61,9 +60,8 @@
 
                 //time-out for listening
                 struct timeval tv;
-                tv.tv_sec = 20;
-                setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO,(const char*)&tv, sizeof(tv));
-
+                tv.tv_sec = 120;
+                setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
 
                 // accepting a client
                 int client_socket = accept(socketfd, (struct sockaddr *) &address_, (socklen_t *) &address_);
