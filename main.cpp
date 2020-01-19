@@ -20,7 +20,7 @@ int main() {
 
     ClientHandler *ch = new SearchClientHandler<Searchable<square*> *, string>(solver,cache_manager);
 
-    s->open(5400, ch);
+    s->open(5600, ch);
 
 
     return 0;
