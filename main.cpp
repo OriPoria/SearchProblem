@@ -10,7 +10,7 @@
 
 int main() {
 
-    server_side::Server *s = new MySerialServer();
+    server_side::Server *s = new MyParallelServer();
 
     Searcher<square*, string> *searcher = new BFS<square*>();
 
