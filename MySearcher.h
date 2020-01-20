@@ -46,13 +46,13 @@ public:
             const char* costStr = (char*)&cost;
             path.pop();
             if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-                solution.append("Up ").append("(").append(sCost2).append("), ");
+                solution.append("Up, ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
-                solution.append("Down ").append("(").append(sCost2).append("), ");
+                solution.append("Down, ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
-                solution.append("Left ").append("(").append(sCost2).append("), ");
+                solution.append("Left, ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
-                solution.append("Right ").append("(").append(sCost2).append("), ");
+                solution.append("Right, ").append("(").append(sCost2).append(")");
             }
             temp1 = temp2;
             pathLength++;
