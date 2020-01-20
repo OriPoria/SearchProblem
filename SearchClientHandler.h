@@ -44,12 +44,12 @@ class SearchClientHandler : public ClientHandler {
         continue;
       }
 
-      if (line.compare("end") == 0) {
+      if (line.compare("end\n") == 0) {
         cout << "End the communication with the client... solving the problem" << endl;
         break;
       } else {
         clientData.push_back(line);
-        const char *readConfirm = "line has beed read successfully";
+        const char *readConfirm = "";
         int is_send = send(client_socket, readConfirm, strlen(readConfirm), 0);
 
       }
@@ -65,10 +65,9 @@ class SearchClientHandler : public ClientHandler {
     P t = solver->createProblem(clientData);
 
     //function that deals with all things with cache(checks if solution is in cache/if not solves and saves
-    string solution = solver->solve(t);
+    S solution = activatingCache(string_of_problom,t);
 
     const char *csolution = solution.c_str();
-
     int is_send = send(client_socket, csolution, strlen(csolution), 0);
     close(client_socket);
 
@@ -138,33 +137,10 @@ class SearchClientHandler : public ClientHandler {
     return string_of_problom;
   }
 
-/*
-
-    vector<string> fromBufferToString(char buffer[]) {
-        string s;
-        vector<string> line;
-        int i = 0;
-        while (buffer[i] != '\0') {
-            while (buffer[i] != ',') {
-                if (buffer[i] == '\0') {
-                    line.push_back(s);
-                    return line;
-                }
-                s.push_back(buffer[i]);
-                i++;
-            }
-        line.push_back(s);
-        s = "";
-        i++;
-    }
-
-    return line;
-    }
-
-
-
- */
-
+ClientHandler* clone() override {
+    ClientHandler* newObj = new SearchClientHandler(this->solver, this->cache_manager);
+    return newObj;
+}
 
 };
 
