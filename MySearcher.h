@@ -7,6 +7,7 @@
 
 #include "Searcher.h"
 #include <stack>
+#include <sstream>
 
 using namespace std;
 template <typename T>
@@ -26,9 +27,10 @@ public:
     }
 
     string backTrace(State<square*>* node, Searchable<square*>* mySearchable) {
-        string solution;
+        string solution = "";
         stack<State<square*>*> path;
         State<square*>* temp1 = node;
+        int pathLength = 0;
         double cost;
         while (temp1 != mySearchable->getInitialState()) {
             path.push(temp1);
@@ -36,26 +38,36 @@ public:
             totalCost+=temp1->getCost();
 
         }
-        cout<<"in MySearcher: total cost of the path: "<<totalCost<<" number of nodes evaluated: "<<this->getNumOfNodesEvaluated()<<endl;
 
+
+        cost = temp1->getCost();
         while (!path.empty()) {
             State<square*>* temp2;
             temp2 = path.top();
+            cost += temp2->getCost();
+            ostringstream sCost;
+            sCost << cost;
+            string sCost2 = sCost.str();
+            const char* costStr = (char*)&cost;
             path.pop();
             if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-                solution.append("Up, ");
+                solution.append("Up ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
-                solution.append("Down, ");
+                solution.append("Down, ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
-                solution.append("Left, ");
+                solution.append("Left, ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
-                solution.append("Right, ");
+                solution.append("Right, ").append("(").append(sCost2).append(")");
             }
             temp1 = temp2;
+            pathLength++;
 
 
 
         }
+        cout<<"in MySearcher: total cost of the path: "<<totalCost<<" path lenght: "<<pathLength<<
+        " number of nodes evaluated: "<<this->getNumOfNodesEvaluated()<< endl;
+
         solution.erase(solution.end()-2);
         return solution;
     }
