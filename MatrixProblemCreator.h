@@ -58,9 +58,8 @@ public:
 
 
             for (j = 0; j < colNum; j++) {
-                square* square1 = new square();
-                square1->row = i;
-                square1->column = j;
+                square* square1 = new square(i,j);
+
 
 
 
@@ -72,7 +71,7 @@ public:
                 //set up for h cost
                 int rows1 = getNumOfRows(input1);
               int cols1 = getNumOfCols(input1);
-                double h_cost = calculateHCostOfNode(square1->row,square1->column,rows1,cols1);
+                double h_cost = calculateHCostOfNode(square1->getRow(),square1->getColumn(),rows1,cols1);
                 State<square*> *state1 = new State<square*>(square1, cost,h_cost);
                 //TODO put h cost
 
@@ -86,20 +85,20 @@ public:
         }
         line = *itRow;
         vector<string>::iterator itCol = line.begin();
-        square* square2 = new square();
-        square2->row = stod(*itCol, &sz);
+         i  = stod(*itCol, &sz);
         itCol++;
-        square2->column = stod(*itCol, &sz);
+        j = stod(*itCol, &sz);
         itRow++;
         line = *itRow;
         itCol = line.begin();
-        square* square3 = new square();
-        square3->row = stod(*itCol, &sz);
+        int k,l;
+
+        k = stod(*itCol, &sz);
         itCol++;
-        square3->column = stod(*itCol, &sz);
+        l = stod(*itCol, &sz);
 
 
-        MatrixProblem *matrix = new MatrixProblem(finalOutput, square2, square3, rowNum, colNum);
+        MatrixProblem *matrix = new MatrixProblem(finalOutput,i,j,k,l, rowNum, colNum);
         return matrix;
     }
     vector<string> fromBufferToString(string string1) {
