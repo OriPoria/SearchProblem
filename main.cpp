@@ -4,15 +4,20 @@
 #include "ObjectAdapter.h"
 #include "SearchClientHandler.h"
 #include "BFS.h"
+#include <iostream>
 #include "FileCacheManager.h"
-#include "DFS.h"
-#include "MyParallelServer.h"
+#include "BestFirstSearch.h"
+#include "AStarsearch.h"
 
 int main() {
 
     server_side::Server *s = new MyParallelServer();
 
-    Searcher<square*, string> *searcher = new BFS<square*>();
+   //Searcher<square*, string> *searcher = new BFS<square*>();
+
+ // Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
+
+  Searcher<square*, string> *searcher = new AStarsearch<square*>();
 
     Solver<Searchable<square*> *, string> *solver = new ObjectAdapter<square*, string>(searcher);
 
@@ -24,4 +29,4 @@ int main() {
 
 
     return 0;
-    }
+}

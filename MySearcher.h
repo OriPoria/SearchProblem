@@ -17,6 +17,11 @@ protected:
     double totalCost;
 public:
 
+  int setTotalCost(int total_cost) {
+     totalCost = total_cost;
+  }
+
+
     int getNumOfNodesEvaluated() {
         return this->nodesEvaluated;
     }
@@ -46,7 +51,7 @@ public:
             const char* costStr = (char*)&cost;
             path.pop();
             if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-                solution.append("Up, ").append("(").append(sCost2).append(")");
+                solution.append("Up ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
                 solution.append("Down, ").append("(").append(sCost2).append(")");
             } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
