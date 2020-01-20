@@ -44,7 +44,7 @@ class SearchClientHandler : public ClientHandler {
         continue;
       }
 
-      if (line.compare("end\n") == 0) {
+      if (line.compare("end\n") == 0 || line.compare("end") == 0) {
         cout << "End the communication with the client... solving the problem" << endl;
         break;
       } else {

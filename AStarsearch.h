@@ -140,13 +140,13 @@ class AStarsearch : public MySearcher<T> {
       State<square *> *temp2;
       temp2 = path.top();
       path.pop();
-      if (temp1->getState()->row > temp2->getState()->row) {
+      if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
         solution.append("Up, ");
-      } else if (temp1->getState()->row < temp2->getState()->row) {
+      } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
         solution.append("Down, ");
-      } else if (temp1->getState()->column > temp2->getState()->column) {
+      } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
         solution.append("Left, ");
-      } else if (temp1->getState()->column < temp2->getState()->column) {
+      } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
         solution.append("Right, ");
       }
       temp1 = temp2;

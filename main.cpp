@@ -8,16 +8,19 @@
 #include "FileCacheManager.h"
 #include "BestFirstSearch.h"
 #include "AStarsearch.h"
+#include "MyParallelServer.h"
 
 int main() {
 
     server_side::Server *s = new MyParallelServer();
+    //Searcher<square*, string> *searcher = new DFS<square*>();
 
-   //Searcher<square*, string> *searcher = new BFS<square*>();
 
- // Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
+   Searcher<square*, string> *searcher = new BFS<square*>();
 
-  Searcher<square*, string> *searcher = new AStarsearch<square*>();
+ //Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
+
+// Searcher<square*, string> *searcher = new AStarsearch<square*>();
 
     Solver<Searchable<square*> *, string> *solver = new ObjectAdapter<square*, string>(searcher);
 

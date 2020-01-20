@@ -33,6 +33,8 @@ public:
         int pathLength = 0;
         double cost;
         while (temp1 != mySearchable->getInitialState()) {
+            State<square*>* temp2 = mySearchable->getInitialState();
+
             path.push(temp1);
             temp1 = temp1->getCamefrom();
             totalCost+=temp1->getCost();

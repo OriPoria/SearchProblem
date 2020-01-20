@@ -50,7 +50,7 @@ class BestFirstSearch : public MySearcher<T> {
       vector_closeList.push_back(node);
 
       if (mySearchable->isGoalState(node)) {
-        return this->backTrace2(node, mySearchable);
+        return this->backTrace(node, mySearchable);
       } else {
 
         //create nodes neighbors
