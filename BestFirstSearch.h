@@ -50,7 +50,7 @@ class BestFirstSearch : public MySearcher<T> {
       vector_closeList.push_back(node);
 
       if (mySearchable->isGoalState(node)) {
-        return this->backTrace(node, mySearchable);
+        return this->backTrace2(node, mySearchable);
       } else {
 
         //create nodes neighbors
@@ -126,7 +126,8 @@ class BestFirstSearch : public MySearcher<T> {
       //  totalCost+=temp1->getCost();
 
    }
-    cout << "in MySearcher: total cost of the path: " << node->getCost() << endl;
+    cout << "in MySearcher: total cost of the path: " << node->getCost() <<
+    "nodes evaluated: " << this->getNumOfNodesEvaluated()<< endl;
 
     while (!path.empty()) {
       State<square *> *temp2;
@@ -151,7 +152,8 @@ class BestFirstSearch : public MySearcher<T> {
   bool hasNodeInOpenList(State<T> *node) {
     //if neighbor node is not in open/closed list
     auto it2 = multiset_openList.find(node);
-    if ((it2 == multiset_openList.end())) {
+      State<T>* temp = *it2;
+    if ((it2 == multiset_openList.end() ||(temp->getState() !=node->getState()))) {
       return false;
     } else {
       return true;
