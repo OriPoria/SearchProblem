@@ -16,9 +16,9 @@ int main() {
     //Searcher<square*, string> *searcher = new DFS<square*>();
 
 
-   Searcher<square*, string> *searcher = new BFS<square*>();
+  // Searcher<square*, string> *searcher = new BFS<square*>();
 
- //Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
+ Searcher<square*, string> *searcher = new BestFirstSearch<square*>();
 
 // Searcher<square*, string> *searcher = new AStarsearch<square*>();
 
