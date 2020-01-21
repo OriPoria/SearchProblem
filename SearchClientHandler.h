@@ -12,6 +12,10 @@
 #include <sys/socket.h>
 #include <vector>
 #include "CacheManager.h"
+#include "AStarsearch.h"
+#include <thread>
+#include <chrono>
+#include <mutex>
 
 template<typename P, typename S>
 class SearchClientHandler : public ClientHandler {
@@ -29,8 +33,10 @@ class SearchClientHandler : public ClientHandler {
     this->cache_manager = cache_manager_;
   }
 
+
   void handleClient(int client_socket) override {
     char buffer[1024] = {0};
+
 
     vector<string> clientData;
     while (true) {
@@ -49,6 +55,7 @@ class SearchClientHandler : public ClientHandler {
         break;
       } else {
         clientData.push_back(line);
+
         const char *readConfirm = "";
         int is_send = send(client_socket, readConfirm, strlen(readConfirm), 0);
 
@@ -60,8 +67,8 @@ class SearchClientHandler : public ClientHandler {
         return;
     }
 
-    string string_of_problom = clientsDataToStringOfProblom(clientData);
 
+    string string_of_problom = clientsDataToStringOfProblom(clientData);
     P t = solver->createProblem(clientData);
 
     //function that deals with all things with cache(checks if solution is in cache/if not solves and saves
@@ -69,7 +76,9 @@ class SearchClientHandler : public ClientHandler {
 
     const char *csolution = solution.c_str();
 
+
     int is_send = send(client_socket, csolution, strlen(csolution), 0);
+    this_thread::sleep_for(chrono::seconds(10));
     close(client_socket);
 
     return;
@@ -90,7 +99,8 @@ class SearchClientHandler : public ClientHandler {
 
   string activatingCache(string problom_in_string, P problom) {
     string solution;
-
+    mutex m;
+    m.lock();
     if (this->cache_manager->isThereASolution(problom_in_string)) {
       solution = this->cache_manager->getSolution(problom_in_string);
     } else {
@@ -98,6 +108,7 @@ class SearchClientHandler : public ClientHandler {
       //save to files
       this->cache_manager->save(problom_in_string, solution);
     }
+    m.unlock();
     return solution;
   }
 
@@ -113,15 +124,6 @@ class SearchClientHandler : public ClientHandler {
 
       std::string s = *it;
 
-      /*
-        size_t pos = 0;
-        std::string token;
-        while ((pos = s.find(delimiter1)) != std::string::npos) {
-          token = s.substr(0, pos);
-          srting_of_line+=token;
-          s.erase(0, pos + delimiter1.length());
-        }
-        */
 
       for (int i = 0; i < s.length(); ++i) {
         if (s[i]==',') {
@@ -131,7 +133,6 @@ class SearchClientHandler : public ClientHandler {
         }
       }
 
-      srting_of_line +="\n";
     }
 
     string_of_problom = srting_of_line;
@@ -139,7 +140,7 @@ class SearchClientHandler : public ClientHandler {
   }
 
     ClientHandler* clone() override {
-        ClientHandler* newObj = new SearchClientHandler(this->solver, this->cache_manager);
+        ClientHandler* newObj = new SearchClientHandler(this->solver->clone(), this->cache_manager);
         return newObj;
     }
 

@@ -17,6 +17,8 @@ public:
     //
     virtual P createProblem(vector<string>) = 0;
 
+    virtual Solver* clone() = 0;
+
 
 };
 

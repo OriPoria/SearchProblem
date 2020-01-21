@@ -12,6 +12,7 @@
 #include "Searcher.h"
 #include "SearchableCreator.h"
 #include "MatrixProblemCreator.h"
+#include "AStarsearch.h"
 
 using namespace std;
 
@@ -47,6 +48,13 @@ public:
 
         return mySearchable;
 
+
+    }
+
+    ObjectAdapter* clone() override {
+        Searcher<T,S>* se = searcher->clone();
+        ObjectAdapter* newObj = new ObjectAdapter<square *, string>(se);
+        return newObj;
 
     }
 

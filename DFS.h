@@ -49,6 +49,14 @@ public:
 
         }
     }
+    Searcher<square*,string>*operator=(DFS<T>* as) override {
+        Searcher<square*,string>* as1 = new DFS<T>();
+        return as1;
+    }
+
+    DFS<T>* clone() override {
+        return new DFS<T>();
+    }
 
 
 };

@@ -13,6 +13,7 @@ class Searcher {
 public:
     virtual S search(Searchable<T>*) = 0;
     virtual int getNumOfNodesEvaluated() = 0;
+    virtual Searcher<T,S>* clone() = 0;
 };
 
 

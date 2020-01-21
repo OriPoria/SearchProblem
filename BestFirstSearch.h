@@ -31,7 +31,6 @@ class BestFirstSearch : public MySearcher<T> {
   vector<State<T> *> vector_closeList;
   vector<State<T> *> neighborsVector;
 
-  int nodesEvaluated;
 
  public:
 
@@ -83,7 +82,7 @@ class BestFirstSearch : public MySearcher<T> {
             this->updateStatePriority(neighbor);
           }
         }
-        nodesEvaluated++;
+        this->nodesEvaluated++;
       }
 
     }
@@ -127,7 +126,7 @@ class BestFirstSearch : public MySearcher<T> {
 
    }
     cout << "in MySearcher: total cost of the path: " << node->getCost() <<
-    "nodes evaluated: " << this->getNumOfNodesEvaluated()<< endl;
+    " nodes evaluated: " << this->getNumOfNodesEvaluated()<< endl;
 
     while (!path.empty()) {
       State<square *> *temp2;
@@ -169,6 +168,9 @@ class BestFirstSearch : public MySearcher<T> {
     }
 
   }
+    BestFirstSearch<T>* clone() override {
+        return new BestFirstSearch<T>();
+    }
 
 };
 
