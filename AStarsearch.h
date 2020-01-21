@@ -154,7 +154,7 @@ class AStarsearch : public MySearcher<T> {
       temp1 = temp2;
 
     }
-    solution.erase(solution.end() - 2);
+    solution.erase(solution.end() - 1);
     return solution;
   }
 

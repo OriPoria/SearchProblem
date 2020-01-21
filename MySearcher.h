@@ -32,6 +32,7 @@ public:
         State<square*>* temp1 = node;
         int pathLength = 0;
         double cost;
+      totalCost+=node->getCost();
         while (temp1 != mySearchable->getInitialState()) {
             State<square*>* temp2 = mySearchable->getInitialState();
 
@@ -53,13 +54,13 @@ public:
             const char* costStr = (char*)&cost;
             path.pop();
             if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-                solution.append("Up ").append("(").append(sCost2).append(")");
+                solution.append("Up ").append("(").append(sCost2).append("),");
             } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
-                solution.append("Down, ").append("(").append(sCost2).append(")");
+                solution.append("Down ").append("(").append(sCost2).append("),");
             } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
-                solution.append("Left, ").append("(").append(sCost2).append(")");
+                solution.append("Left ").append("(").append(sCost2).append("),");
             } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
-                solution.append("Right, ").append("(").append(sCost2).append(")");
+                solution.append("Right ").append("(").append(sCost2).append("),");
             }
             temp1 = temp2;
             pathLength++;
@@ -70,7 +71,7 @@ public:
         cout<<"in MySearcher: total cost of the path: "<<totalCost<<" path lenght: "<<pathLength<<
         " number of nodes evaluated: "<<this->getNumOfNodesEvaluated()<< endl;
 
-        solution.erase(solution.end()-2);
+        solution.erase(solution.end()-1);
         return solution;
     }
 
