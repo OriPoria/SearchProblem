@@ -131,7 +131,7 @@ class SearchClientHandler : public ClientHandler {
         }
       }
 
-      srting_of_line +="\n";
+      //srting_of_line +="\n";
     }
 
     string_of_problom = srting_of_line;

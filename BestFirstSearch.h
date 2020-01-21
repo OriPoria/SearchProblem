@@ -31,7 +31,6 @@ class BestFirstSearch : public MySearcher<T> {
   vector<State<T> *> vector_closeList;
   vector<State<T> *> neighborsVector;
 
-  int nodesEvaluated;
 
  public:
 
@@ -50,7 +49,7 @@ class BestFirstSearch : public MySearcher<T> {
       vector_closeList.push_back(node);
 
       if (mySearchable->isGoalState(node)) {
-        return this->backTrace(node, mySearchable);
+        return this->backTrace2(node, mySearchable);
       } else {
 
         //create nodes neighbors
@@ -83,7 +82,7 @@ class BestFirstSearch : public MySearcher<T> {
             this->updateStatePriority(neighbor);
           }
         }
-        nodesEvaluated++;
+        this->nodesEvaluated++;
       }
 
     }
@@ -121,25 +120,28 @@ class BestFirstSearch : public MySearcher<T> {
     State<square *> *temp1 = node;
     double cost;
     while (temp1 != mySearchable->getInitialState()) {
-     path.push(temp1);
-        temp1 = temp1->getCamefrom();
+      path.push(temp1);
+      temp1 = temp1->getCamefrom();
       //  totalCost+=temp1->getCost();
 
-   }
+    }
     cout << "in MySearcher: total cost of the path: " << node->getCost() << endl;
 
     while (!path.empty()) {
       State<square *> *temp2;
       temp2 = path.top();
+      ostringstream os_string_cost;
+      os_string_cost<<temp2->getCost();
+      string string_cost = os_string_cost.str();
       path.pop();
       if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-        solution.append("Up, ");
-      } else if (temp1->getState()->getRow()< temp2->getState()->getRow()) {
-        solution.append("Down, ");
+        solution.append("Up ").append("(").append(string_cost).append("),");
+      } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
+        solution.append("Down ").append("(").append(string_cost).append("),");
       } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
-        solution.append("Left, ");
+        solution.append("Left ").append("(").append(string_cost).append("),");
       } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
-        solution.append("Right, ");
+        solution.append("Right ").append("(").append(string_cost).append("),");
       }
       temp1 = temp2;
 
@@ -149,14 +151,14 @@ class BestFirstSearch : public MySearcher<T> {
   }
 
   bool hasNodeInOpenList(State<T> *node) {
-    //if neighbor node is not in open/closed list
-    auto it2 = multiset_openList.find(node);
-    if ((it2 == multiset_openList.end())) {
-      return false;
-    } else {
-      return true;
+    for (auto item : multiset_openList) {
+      //we have current in openList
+      if (node == item) {
+        return true;
+      }
     }
-
+    //we do not have current in openList
+    return false;
   }
 
   bool hasNodeInClosedList(State<T> *node) {
@@ -166,6 +168,19 @@ class BestFirstSearch : public MySearcher<T> {
       return false;
     }
 
+  }
+
+
+  //check if we have current in openList
+  virtual bool doWeHaveThisNodeInOpenList(State<T> *current) {
+    for (auto item : multiset_openList) {
+      //we have current in openList
+      if (current == item) {
+        return true;
+      }
+    }
+    //we do not have current in openList
+    return false;
   }
 
 };

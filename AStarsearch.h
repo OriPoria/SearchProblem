@@ -34,7 +34,6 @@ class AStarsearch : public MySearcher<T> {
   vector<State<T> *> vector_closeList;
   vector<State<T> *> neighborsVector;
 
-  int nodesEvaluated;
 
  public:
 
@@ -87,7 +86,7 @@ class AStarsearch : public MySearcher<T> {
             this->updateStatePriority(neighbor);
           }
         }
-        nodesEvaluated++;
+        this->nodesEvaluated++;
       }
 
     }
@@ -139,15 +138,18 @@ class AStarsearch : public MySearcher<T> {
     while (!path.empty()) {
       State<square *> *temp2;
       temp2 = path.top();
+      ostringstream os_string_cost;
+      os_string_cost<<temp2->getCost();
+      string string_cost = os_string_cost.str();
       path.pop();
       if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-        solution.append("Up, ");
+        solution.append("Up ").append("(").append(string_cost).append("),");
       } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
-        solution.append("Down, ");
+        solution.append("Down ").append("(").append(string_cost).append("),");
       } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
-        solution.append("Left, ");
+        solution.append("Left ").append("(").append(string_cost).append("),");
       } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
-        solution.append("Right, ");
+        solution.append("Right ").append("(").append(string_cost).append("),");
       }
       temp1 = temp2;
 
@@ -156,6 +158,7 @@ class AStarsearch : public MySearcher<T> {
     return solution;
   }
 
+/*
   bool hasNodeInOpenList(State<T> *node) {
     //if neighbor node is not in open/closed list
     auto it2 = multiset_openList.find(node);
@@ -165,6 +168,20 @@ class AStarsearch : public MySearcher<T> {
       return true;
     }
 
+  }
+*/
+
+
+
+    bool hasNodeInOpenList(State<T> *node) {
+    for (auto item : multiset_openList) {
+      //we have current in openList
+      if (node == item) {
+        return true;
+      }
+    }
+    //we do not have current in openList
+    return false;
   }
 
   bool hasNodeInClosedList(State<T> *node) {
