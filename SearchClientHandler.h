@@ -78,7 +78,6 @@ class SearchClientHandler : public ClientHandler {
 
 
     int is_send = send(client_socket, csolution, strlen(csolution), 0);
-    this_thread::sleep_for(chrono::seconds(10));
     close(client_socket);
 
     return;

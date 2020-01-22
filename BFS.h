@@ -52,10 +52,7 @@ public:
 
 
     }
-    Searcher<square*,string>*operator=(BFS<T>* as) override {
-        Searcher<square*,string>* as1 = new BFS<T>();
-        return as1;
-    }
+
 
     BFS<T>* clone() override {
         return new BFS<T>();

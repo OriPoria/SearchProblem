@@ -36,7 +36,7 @@ int MyParallelServer::open(int port, ClientHandler *handler) {
 }
 
 void MyParallelServer::stop() {
-    cout<<"No new clients, close the server...";
+    cout<<"No new clients, close the server..."<<endl;
     for (int j = 0; j < i; j++) {
         client[j].join();
     }
@@ -58,7 +58,7 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
 
             //time-out for listening
             struct timeval tv;
-            tv.tv_sec = 60;
+            tv.tv_sec = 120;
             setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof(tv));
 
 

@@ -11,7 +11,7 @@
 #include "MyParallelServer.h"
 
 
-int main() {
+int main(int argc, char* argv[]) {
 
     server_side::Server *s = new MyParallelServer();
 
@@ -19,7 +19,7 @@ int main() {
     //Searcher<square*, string> *searcher = new BFS<square*>();
 
 
-    Searcher<square *, string> *searcher = new AStarsearch<square *>();
+    Searcher<square *, string> *searcher = new BestFirstSearch<square *>();
 
     Solver<Searchable<square *> *, string> *solver = new ObjectAdapter<square *, string>(searcher);
 
@@ -27,7 +27,7 @@ int main() {
 
     ClientHandler *ch = new SearchClientHandler<Searchable<square *> *, string>(solver, cache_manager);
 
-    s->open(5400, ch);
+    s->open(atoi(argv[1]), ch);
 
 
     return 0;

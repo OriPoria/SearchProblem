@@ -18,9 +18,6 @@ protected:
     double totalCost;
 public:
 
-    int setTotalCost(int total_cost) {
-        totalCost = total_cost;
-    }
 
 
     int getNumOfNodesEvaluated() {
@@ -31,8 +28,8 @@ public:
         string solution = "";
         stack<State<square *> *> path;
         State<square *> *temp1 = node;
-        double cost;
 
+        totalCost += temp1->getCost();
         while (temp1 != mySearchable->getInitialState()) {
             State<square *> *temp2 = mySearchable->getInitialState();
 
@@ -42,6 +39,7 @@ public:
 
         }
 
+        double cost;
         cost = temp1->getCost();
         while (!path.empty()) {
             State<square *> *temp2;
@@ -53,13 +51,13 @@ public:
             const char *costStr = (char *) &cost;
             path.pop();
             if (temp1->getState()->getRow() > temp2->getState()->getRow()) {
-                solution.append("Up ").append("(").append(sCost2).append("),");
+                solution.append("Up ").append("(").append(sCost2).append("), ");
             } else if (temp1->getState()->getRow() < temp2->getState()->getRow()) {
-                solution.append("Down ").append("(").append(sCost2).append("),");
+                solution.append("Down ").append("(").append(sCost2).append("), ");
             } else if (temp1->getState()->getColumn() > temp2->getState()->getColumn()) {
-                solution.append("Left ").append("(").append(sCost2).append("),");
+                solution.append("Left ").append("(").append(sCost2).append("), ");
             } else if (temp1->getState()->getColumn() < temp2->getState()->getColumn()) {
-                solution.append("Right ").append("(").append(sCost2).append("),");
+                solution.append("Right ").append("(").append(sCost2).append("), ");
             }
             temp1 = temp2;
 
@@ -68,7 +66,7 @@ public:
         cout << "in MySearcher: total cost of the path: " << totalCost << " number of nodes evaluated: "
              << this->getNumOfNodesEvaluated() << endl;
 
-        solution.erase(solution.end() - 2);
+        solution.erase(solution.end() - 1);
         return solution;
     }
 
