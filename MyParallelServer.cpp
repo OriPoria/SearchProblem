@@ -30,15 +30,15 @@ int MyParallelServer::open(int port, ClientHandler *handler) {
         std::cerr << "Could not bind the socket to an IP" << std::endl;
         return -2;
     }
-    start(socketfd, handler, address_);
+    thread handle([this, socketfd, handler, address_] {start(socketfd, handler, address_);});
+    handle.join();
     return 0;
 }
 
 void MyParallelServer::stop() {
-    cout<<"No new clients, close the server...";
-    for (int i = 0; i < 10; i++ ) {
-        client[i].join();
-        i--;
+    cout<<"No new clients, close the server..."<<endl;
+    for (int j = 0; j < i; j++) {
+        client[j].join();
     }
     this->stop_server = true;
 
@@ -48,7 +48,7 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
     //making socket listen to the port
 
 
-    while (!stop_server || i < 5) {
+    while (!stop_server) {
 
         if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
             std::cerr << "Error during listening command" << std::endl;
@@ -58,7 +58,7 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
 
             //time-out for listening
             struct timeval tv;
-            tv.tv_sec = 20;
+            tv.tv_sec = 120;
             setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof(tv));
 
 
@@ -70,16 +70,18 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
                 stop();
                 continue;
             }
-            cout<<"in main: client socket: "<< client_socket<<endl;
                 cout << "waiting for message from client number " << i << "\n\n"<< endl;
 
             client[i] = thread(&ClientHandler::handleClient,handler->clone(), client_socket);
             i++;
+            if (i == 10) {
+                stop();
+            }
 
         }
 
 
     }
-    stop();
+    close(socketfd);
     return;
 }

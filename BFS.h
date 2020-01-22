@@ -52,8 +52,11 @@ public:
 
 
     }
-    //not here!
 
+
+    BFS<T>* clone() override {
+        return new BFS<T>();
+    }
 };
 
 
