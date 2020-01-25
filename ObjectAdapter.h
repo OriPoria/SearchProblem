@@ -29,10 +29,8 @@ public:
 
 
     virtual S solve(Searchable<T> *p) override {
-        //z) setSearchable(p);
 
         S s = searcher->search(p);
-        //  string result_string = fromProblomToString(s)
 
         return s;
 
@@ -40,8 +38,6 @@ public:
 
     Searchable<T> *createProblem(vector<string> input) override {
 
-
-        //going forward we can make a creator according to the input
         SearchableCreator<square *> *sc = new MatrixProblemCreator();
 
         Searchable<T> *mySearchable = sc->create(input);
@@ -51,9 +47,9 @@ public:
 
     }
 
-    ObjectAdapter* clone() override {
-        Searcher<T,S>* se = searcher->clone();
-        ObjectAdapter* newObj = new ObjectAdapter<square *, string>(se);
+    ObjectAdapter *clone() override {
+        Searcher<T, S> *se = searcher->clone();
+        ObjectAdapter *newObj = new ObjectAdapter<square *, string>(se);
         return newObj;
 
     }

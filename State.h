@@ -11,7 +11,7 @@ private:
     int row;
     int column;
 public:
-    square(int i,int j) {
+    square(int i, int j) {
         this->row = i;
         this->column = j;
     }
@@ -36,22 +36,23 @@ private:
     State<T> *camefrom;
     char color;
 public:
-    double getCost() const {
-        return cost;
-    }
-  double GetHCost() const {
-    return h_cost;
-  }
-  void setCost(double cost) {
-        State::cost = cost;
-    }
-
-
     State(T state1, double cost1, double h_cost_) {
         this->state = state1;
         this->cost = cost1;
         this->color = 'w';
         this->h_cost = h_cost_;
+    }
+
+    double getCost() const {
+        return cost;
+    }
+
+    double GetHCost() const {
+        return h_cost;
+    }
+
+    void setCost(double cost) {
+        State::cost = cost;
     }
 
 

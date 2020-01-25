@@ -30,13 +30,15 @@ int MyParallelServer::open(int port, ClientHandler *handler) {
         std::cerr << "Could not bind the socket to an IP" << std::endl;
         return -2;
     }
-    thread handle([this, socketfd, handler, address_] {start(socketfd, handler, address_);});
+    thread handle([this, socketfd, handler, address_] { start(socketfd, handler, address_); });
     handle.join();
     return 0;
 }
 
+
+//close the server in case we have got 10 clients or there were no connections to the server
 void MyParallelServer::stop() {
-    cout<<"No new clients, close the server..."<<endl;
+    cout << "Close the server..." << endl;
     for (int j = 0; j < i; j++) {
         client[j].join();
     }
@@ -45,8 +47,6 @@ void MyParallelServer::stop() {
 }
 
 void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in address_) {
-    //making socket listen to the port
-
 
     while (!stop_server) {
 
@@ -70,9 +70,9 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
                 stop();
                 continue;
             }
-                cout << "waiting for message from client number " << i << "\n\n"<< endl;
+            cout << "waiting for message" << endl;
 
-            client[i] = thread(&ClientHandler::handleClient,handler->clone(), client_socket);
+            client[i] = thread(&ClientHandler::handleClient, handler->clone(), client_socket);
             i++;
             if (i == 10) {
                 stop();

@@ -29,7 +29,6 @@ template<typename T>
 class AStarsearch : public MySearcher<T> {
 private:
     multiset<State<square *> *, ComparatorByCost2<square *>> multiset_openList;
-    // multiset<State<T>*> multiset_openList;
 
     vector<State<T> *> vector_closeList;
     vector<State<T> *> neighborsVector;
@@ -45,7 +44,7 @@ public:
 
 
 
-//starting algo
+        //starting algo
         while (!multiset_openList.empty()) {
             State<T> *node = *multiset_openList.begin();
             multiset_openList.erase(multiset_openList.begin());
@@ -81,9 +80,11 @@ public:
                     } else if (hasNodeInClosedList(neighbor)) { // neighbor is in ClosedList
                         continue;
                     } else {
-                        //if we have this neighbor in openList, so we need to check his cost and maybe
-                        // update it if the cost of neighbour is lower then the node we
-                        //already have in openList
+                        /*
+                         * if we have this neighbor in openList, so we need to check his cost and maybe
+                         * update it if the cost of neighbour is lower then the node we
+                         * already have in openList
+                         */
                         this->updateStatePriority(neighbor);
                     }
                 }
@@ -133,9 +134,7 @@ public:
         while (temp1 != mySearchable->getInitialState()) {
             path.push(temp1);
             temp1 = temp1->getCamefrom();
-
         }
-
 
 
         while (!path.empty()) {
@@ -181,7 +180,7 @@ public:
 
     }
 
-    AStarsearch<T>* clone() override {
+    AStarsearch<T> *clone() override {
         return new AStarsearch<T>();
     }
 

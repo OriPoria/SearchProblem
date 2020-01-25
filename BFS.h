@@ -13,15 +13,15 @@
 #include <queue>
 #include <iterator>
 
-template <typename T>
+template<typename T>
 class BFS : public MySearcher<T> {
 private:
-    queue<State<T>*> myQueue;
-    vector<State<T>*> myVec;
+    queue<State<T> *> myQueue;
+    vector<State<T> *> myVec;
 public:
 
-    virtual string search(Searchable<T>* mySearchable) override {
-        State<T>* node = mySearchable->getInitialState();
+    virtual string search(Searchable<T> *mySearchable) override {
+        State<T> *node = mySearchable->getInitialState();
         node->setColor('g');
         myQueue.push(node);
         while (!myQueue.empty()) {
@@ -35,9 +35,9 @@ public:
                 continue;
             }
             myVec = mySearchable->getAllPossibleStates(node);
-            typename vector<State<T>*>::iterator it = myVec.begin();
-            for (it ; it < myVec.end(); it++) {
-                State<T>* adj = *it;
+            typename vector<State<T> *>::iterator it = myVec.begin();
+            for (it; it < myVec.end(); it++) {
+                State<T> *adj = *it;
                 if (adj->getColor() == 'w') {
                     adj->setColor('g');
                     adj->setCamefrom(node);
@@ -49,12 +49,10 @@ public:
         }
 
 
-
-
     }
 
 
-    BFS<T>* clone() override {
+    BFS<T> *clone() override {
         return new BFS<T>();
     }
 };

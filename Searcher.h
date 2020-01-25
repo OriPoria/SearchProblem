@@ -8,14 +8,15 @@
 #include "Searchable.h"
 #include <string>
 
-template <typename T,typename S>
+template<typename T, typename S>
 class Searcher {
 public:
-    virtual S search(Searchable<T>*) = 0;
-    virtual int getNumOfNodesEvaluated() = 0;
-    virtual Searcher<T,S>* clone() = 0;
-};
+    virtual S search(Searchable<T> *) = 0;
 
+    virtual int getNumOfNodesEvaluated() = 0;
+
+    virtual Searcher<T, S> *clone() = 0;
+};
 
 
 #endif //EX4_SEARCHER_H

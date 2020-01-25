@@ -14,8 +14,9 @@ using namespace std;
 class ClientHandler {
 
 public:
-  virtual void handleClient(int) = 0;
-  virtual ClientHandler* clone() = 0;
+    virtual void handleClient(int) = 0;
+
+    virtual ClientHandler *clone() = 0;
 
 
 };

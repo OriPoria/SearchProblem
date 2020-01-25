@@ -9,20 +9,18 @@
 #include <vector>
 
 using namespace std;
-template <typename P, typename S>
+
+template<typename P, typename S>
 class Solver {
 public:
-    virtual S solve(P) = 0;//Problom,Solver
+    virtual S solve(P) = 0;
 
-    //
     virtual P createProblem(vector<string>) = 0;
 
-    virtual Solver* clone() = 0;
+    virtual Solver *clone() = 0;
 
 
 };
-
-
 
 
 #endif //EX4_SOLVER_H

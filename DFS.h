@@ -12,14 +12,14 @@
 #include <stack>
 #include <iterator>
 
-template <typename T>
+template<typename T>
 class DFS : public MySearcher<T> {
 private:
-    stack<State<T>*> myStack;
-    vector<State<T>*> myVec;
+    stack<State<T> *> myStack;
+    vector<State<T> *> myVec;
 public:
-    virtual string search(Searchable<T>* mySearchable) override {
-        State<T>* node = mySearchable->getInitialState();
+    virtual string search(Searchable<T> *mySearchable) override {
+        State<T> *node = mySearchable->getInitialState();
         node->setColor('g');
         myStack.push(node);
         while (!myStack.empty()) {
@@ -30,7 +30,7 @@ public:
                 continue;
             }
             myVec = mySearchable->getAllPossibleStates(node);
-            typename vector<State<T>*>::iterator it = myVec.begin();
+            typename vector<State<T> *>::iterator it = myVec.begin();
             for (it; it < myVec.end(); it++) {
                 State<T> *adj = *it;
                 if (adj->getColor() == 'w' && adj->getCost() != -1) {
@@ -50,7 +50,7 @@ public:
         }
     }
 
-    DFS<T>* clone() override {
+    DFS<T> *clone() override {
         return new DFS<T>();
     }
 

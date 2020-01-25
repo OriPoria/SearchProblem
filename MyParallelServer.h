@@ -16,14 +16,10 @@
 #include <queue>
 
 
-
-
-
 using namespace std;
 
 class MyParallelServer : public server_side::Server {
 private:
-    int socketfd;
     volatile bool stop_server = false;
     thread client[10];
     volatile int i;
@@ -32,7 +28,7 @@ public:
 
     void stop() override;
 
-    void start(int, ClientHandler* handler, sockaddr_in);//gets socketfd
+    void start(int, ClientHandler *handler, sockaddr_in);
 
 };
 

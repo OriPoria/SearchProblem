@@ -10,26 +10,14 @@ using namespace std;
 
 template<class P, class S>
 class CacheManager {
- public:
-  virtual void save(P problem, S solution) = 0;
+public:
+    virtual void save(P problem, S solution) = 0;
 
-  virtual S getSolution(P problem) = 0;
+    virtual S getSolution(P problem) = 0;
 
-  virtual bool isThereASolution(P problem) = 0;
+    virtual bool isThereASolution(P problem) = 0;
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif //EX4__CACHEMANAGER_H_

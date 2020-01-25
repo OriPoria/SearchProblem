@@ -19,11 +19,12 @@ protected:
 public:
 
 
-
     int getNumOfNodesEvaluated() {
         return this->nodesEvaluated;
     }
 
+
+    //function that restores the path by calling the 'cameFrom' data memebr
     virtual string backTrace(State<square *> *node, Searchable<square *> *mySearchable) {
         string solution = "";
         stack<State<square *> *> path;
@@ -39,6 +40,7 @@ public:
 
         }
 
+        //crate the string of the solution
         double cost;
         cost = temp1->getCost();
         while (!path.empty()) {

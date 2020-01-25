@@ -17,6 +17,7 @@
 #include "BestFirstSearch.h"
 #include "AStarsearch.h"
 #include "MyParallelServer.h"
+
 namespace boot {
     class Main;
 }
@@ -24,15 +25,16 @@ namespace boot {
 class boot::Main {
 
 public:
-    Main(){};
-    ~Main(){};
-    int main() {
+    Main() {};
+
+    ~Main() {};
+
+    int main(int port) {
 
         server_side::Server *s = new MyParallelServer();
 
-        Searcher<square*, string> *searcher = new AStarsearch<square*>();
-
-
+        //here we can call any searcher we want
+        Searcher<square *, string> *searcher = new AStarsearch<square *>();
 
         Solver<Searchable<square *> *, string> *solver = new ObjectAdapter<square *, string>(searcher);
 
@@ -40,7 +42,7 @@ public:
 
         ClientHandler *ch = new SearchClientHandler<Searchable<square *> *, string>(solver, cache_manager);
 
-        s->open(5400, ch);
+        s->open(port, ch);
 
 
         return 0;

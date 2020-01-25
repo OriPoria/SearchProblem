@@ -1,8 +1,7 @@
 #include "Boot.h"
 
-using namespace boot;
 
-int main() {
-    Main m;
-    m.main();
+int main(int argc, char* argv[]) {
+    boot::Main m;
+    m.main(atoi(argv[1]));
 }

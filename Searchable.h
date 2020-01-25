@@ -10,19 +10,16 @@
 
 using namespace std;
 
-template <typename T>
+template<typename T>
 class Searchable {
 public:
-     virtual State<T>* getInitialState() = 0;
-     virtual bool isGoalState(State<T>* state) = 0;
-     virtual vector<State<T>*> getAllPossibleStates(State<T>*) = 0;
+    virtual State<T> *getInitialState() = 0;
+
+    virtual bool isGoalState(State<T> *state) = 0;
+
+    virtual vector<State<T> *> getAllPossibleStates(State<T> *) = 0;
 
 };
-
-
-
-
-
 
 
 #endif //EX4_SEARCHABLE_H

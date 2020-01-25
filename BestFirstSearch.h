@@ -183,7 +183,7 @@ public:
         return false;
     }
 
-    BestFirstSearch<T>* clone() override {
+    BestFirstSearch<T> *clone() override {
         return new BestFirstSearch<T>();
     }
 

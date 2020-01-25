@@ -17,24 +17,19 @@
 #include <unistd.h>
 
 
-
-
-
 using namespace std;
 
 class MySerialServer : public server_side::Server {
- private:
+private:
     int socketfd;
     volatile bool stop_server = false;
 
- public:
-
-
-    int open(int, ClientHandler*) override;
+public:
+    int open(int, ClientHandler *) override;
 
     void stop() override;
 
-    void start(int, ClientHandler* handler, sockaddr_in);//gets socketfd
+    void start(int, ClientHandler *handler, sockaddr_in);
 };
 
 
