@@ -47,6 +47,10 @@ public:
 
     }
 
+    /*
+     * we need to clone the object adapter in order to avoid duplications of the objects
+     * that solve the problem in the parallel server
+     */
     ObjectAdapter *clone() override {
         Searcher<T, S> *se = searcher->clone();
         ObjectAdapter *newObj = new ObjectAdapter<square *, string>(se);

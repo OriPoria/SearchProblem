@@ -50,6 +50,7 @@ public:
                 continue;
             }
 
+            //end of messages from the client, we need to break the loop
             if (line.compare("end\n") == 0 || line.compare("end") == 0) {
                 cout << "End the communication with the client... solving the problem" << endl;
                 break;

@@ -72,6 +72,8 @@ void MyParallelServer::start(int socketfd, ClientHandler *handler, sockaddr_in a
             }
             cout << "waiting for message" << endl;
 
+            //open a new thread for each client, clones the handler to avoid collisions, and
+            //if we have got 10 clients, close the server
             client[i] = thread(&ClientHandler::handleClient, handler->clone(), client_socket);
             i++;
             if (i == 10) {

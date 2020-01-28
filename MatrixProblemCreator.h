@@ -17,6 +17,13 @@ class MatrixProblemCreator : public SearchableCreator<square *> {
 public:
 
 
+/*
+ * this method has the responsibility to the creation of the matrix.
+ * it wil parse the vector of strings that we got as input and from all the lines
+ * except for the last two it will put in a matrix, and the last two will determine
+ * as the initial state, and the goal state. at the end we call the constuctor
+ * of the matrix and return it.
+ */
     virtual Searchable<square *> *create(vector<string> input1) override {
 
         string::size_type sz;
@@ -80,6 +87,7 @@ public:
             itRow++;
 
         }
+        //get the values of the initial state and the goal state
         line = *itRow;
         vector<string>::iterator itCol = line.begin();
         i = stod(*itCol, &sz);

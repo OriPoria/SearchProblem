@@ -5,7 +5,9 @@
 #ifndef EX4_STATE_H
 #define EX4_STATE_H
 
-
+/*
+ * class the define the T value of the matrix in our problem
+ */
 class square {
 private:
     int row;
@@ -26,7 +28,7 @@ public:
 
 };
 
-
+//data member of color for the search algorithms
 template<typename T>
 class State {
 private:
