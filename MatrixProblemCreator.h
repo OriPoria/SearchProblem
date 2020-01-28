@@ -87,7 +87,7 @@ public:
             itRow++;
 
         }
-        //get the values of the initial state and the goal state
+        //get the values of the initial state and the` goal state
         line = *itRow;
         vector<string>::iterator itCol = line.begin();
         i = stod(*itCol, &sz);
