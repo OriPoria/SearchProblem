@@ -36,13 +36,6 @@ create a new problem, and stil the machanizm that solve the problem. and returns
 - prepare a text file of matrix, each sqare represnts the cost, 
   at the end of every line '\n' and values seperated with ','.
   last two lines are the starting point and end point at the last line - 'end\n'.
-	example:
-		1,2,4\n		//
-		3,4,6\n		// matrix 3X3	
-		5,6,7\n		//
-		0,0\n		//starting poing
-		2,2\n		//end point
-		end\n		//EOF string
 
 # Links
 - for github: //https://github.com/oripo1312/ex4
